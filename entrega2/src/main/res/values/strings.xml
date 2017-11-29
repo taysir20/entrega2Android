@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Entrega2</string>
+    <string name="lblBienvenida">Estás logueado en la APP</string>
+    <string name="btnLogOut">Cerrar Sesión</string>
+</resources>
