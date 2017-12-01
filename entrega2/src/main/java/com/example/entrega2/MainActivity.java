@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.entrega2.firebase.FirebaseAdmin;
+import com.example.entrega2.firebase.FirebaseAdminListener;
 import com.example.mylib.fragment.LoginFragment;
 import com.example.mylib.fragment.RegisterFragment;
 
@@ -22,12 +23,17 @@ public class MainActivity extends AppCompatActivity{
         this.loginFragment = (LoginFragment)getSupportFragmentManager().findFragmentById(R.id.loginFragment);
         this.registerFragment=(RegisterFragment)getSupportFragmentManager().findFragmentById(R.id.registerFragment);
         event = new MainActivityEvents(this);
+        firebaseAdmin.setFirebaseAdminListener(event);
         this.loginFragment.setLoginFragmentListener(event);
         this.registerFragment.setRegisterFragmentListener(event);
 
         android.support.v4.app.FragmentTransaction transition = this.getSupportFragmentManager().beginTransaction();
         transition.hide(this.getRegisterFragment());
         transition.commit();
+    }
+
+    public void estaslog(){
+
     }
 
     public LoginFragment getLoginFragment() {

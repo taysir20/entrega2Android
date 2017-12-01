@@ -14,6 +14,7 @@ public class SecondActivity extends AppCompatActivity {
     private FirebaseAdmin firebaseAdmin;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,7 @@ public class SecondActivity extends AppCompatActivity {
         this.lblBievenida.setText(R.string.lblBienvenida);
         this.btnLogOut.setText(R.string.btnLogOut);
         events = new SecondActivityEvents(this);
+        firebaseAdmin.setFirebaseAdminListener(events);
         this.btnLogOut.setOnClickListener(events);
 
     }

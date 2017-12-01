@@ -2,6 +2,7 @@ package com.example.entrega2;
 
 import com.example.entrega2.firebase.FirebaseAdmin;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by tay on 25/11/17.
@@ -10,15 +11,25 @@ import com.google.firebase.auth.FirebaseAuth;
 public class DataHolder {
 
     public static class MyDataHolder {
-        public static FirebaseAuth firebaseAuth;
+        public static FirebaseAdmin firebaseAdmin;
+        //private static FirebaseDatabase firebaseDatabase;
 
-        public static FirebaseAuth getFirebaseAuth() {
-            return firebaseAuth;
+        public static FirebaseAdmin getFirebaseAdmin() {
+            return firebaseAdmin;
         }
 
-        public static void setFirebaseAuth(FirebaseAuth firebaseAuth) {
-            MyDataHolder.firebaseAuth = firebaseAuth;
+        public static void setFirebaseAdmin(FirebaseAdmin firebaseAdmin) {
+            MyDataHolder.firebaseAdmin = firebaseAdmin;
         }
+        /*
+        public static FirebaseDatabase getFirebaseDatabase() {
+            return firebaseDatabase;
+        }
+
+        public static void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
+            MyDataHolder.firebaseDatabase = firebaseDatabase;
+        }
+        */
     }
 
 

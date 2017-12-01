@@ -16,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
  * Created by tay on 25/11/17.
  */
 
-public class SecondActivityEvents implements View.OnClickListener,FirebaseAdminListener {
+public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener {
 
     private SecondActivity secondActivity;
 
@@ -32,32 +32,33 @@ public class SecondActivityEvents implements View.OnClickListener,FirebaseAdminL
         this.secondActivity = secondActivity;
     }
 
-    @Override
-    public void createUserWithEmailAndPassword(String emailAddress, String password) {
-
-    }
-
-    @Override
-    public void signInWithEmailAndPassword(String emailAddress, String password) {
-
-    }
-
-    @Override
-    public void logOut() {
-        DataHolder.MyDataHolder.getFirebaseAuth().signOut();
-
-        Intent intent = new Intent(secondActivity, MainActivity.class);
-        secondActivity.startActivity(intent);
-        secondActivity.finish();
-
-    }
-
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.btnLogOut){
-            this.logOut();
+        if (view.getId() == R.id.btnLogOut) {
+            System.out.println(  DataHolder.MyDataHolder.getFirebaseAdmin().getmAuth());
+            DataHolder.MyDataHolder.getFirebaseAdmin().logOut();
 
+        }
+    }
+
+    @Override
+    public void loginIsOk(boolean ok) {
+
+    }
+
+    @Override
+    public void registerOk(boolean ok) {
+
+    }
+
+    @Override
+    public void signOutOk(boolean ok) {
+        System.out.println("eeebuehhhKitipasa: " + ok);
+        if(ok){
+            Intent intent = new Intent(secondActivity, MainActivity.class);
+            secondActivity.startActivity(intent);
+            secondActivity.finish();
         }
     }
 }

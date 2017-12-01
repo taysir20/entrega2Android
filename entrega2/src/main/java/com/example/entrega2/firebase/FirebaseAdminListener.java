@@ -6,7 +6,7 @@ package com.example.entrega2.firebase;
 
 public interface FirebaseAdminListener {
 
-    public void createUserWithEmailAndPassword(String emailAddress, String password);
-    public void signInWithEmailAndPassword(String emailAddress, String password);
-    public void logOut();
+   public void loginIsOk(boolean ok);
+   public void registerOk(boolean ok);
+   public void signOutOk(boolean ok);
 }
