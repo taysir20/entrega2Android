@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.example.mylib.R;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -32,7 +34,15 @@ public class ListFragment extends Fragment {
         myLista.setLayoutManager(new GridLayoutManager(getContext(),2)); // spanCount es el número de columnas. Esto hace directamente que sea una colección, dado que una tabla solo tiene una columna.
         //Ahora creamos un adapter que va a ser el encargado de rellenar con datos la colección.
         //Creamos el  nuevo ListAdapter y pintara todo el contenido de list Adapter
-        myLista.setAdapter(new ListAdapter());
+        ArrayList<String> contenidoLista = new ArrayList<String>(); // este array lo creamos de forma manual, pero a posteriori lo que haremos es descargarlo de firebase
+        contenidoLista.add("Yony");
+        contenidoLista.add("Javier");
+        contenidoLista.add("Ramsés");
+        contenidoLista.add("Sergio");
+        contenidoLista.add("Oscar");
+        contenidoLista.add("Manuel");
+        contenidoLista.add("Taysir");
+        myLista.setAdapter(new ListAdapter(contenidoLista)); // pasamos por parámetro el arrayList creado para inicializar el arrayList del listAdapter
 
         return view;
     }

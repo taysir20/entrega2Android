@@ -8,11 +8,20 @@ import android.widget.TextView;
 
 import com.example.mylib.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by tay on 28/11/17.
  */
 
+
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
+    private ArrayList<String> contenidoLista; //declaramos un array que contiene contenido que queremos que s epinte en las celdas de la lista
+
+    public ListAdapter(ArrayList<String> contenidoLista) {
+        this.contenidoLista = contenidoLista;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) { //creamos el molde de la celda y lo asociamos con su xml que es el que hemos creado llamado list_cell_layout.
         //Este xml es la parte visual de la celda (lo que queremos que contenga)
@@ -26,21 +35,33 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {//pinta el contenido de los elementos de la celda a través del molde y para cada posición de las celda.
-    if(position==0){
+            holder.getTxtNombre().setText(this.getContenidoLista().get(position)); // por cada posición se pinta una posición del arraylist
+
+
+
+    /*if(position==0){
         holder.getTxtNombre().setText("Yony");
     }else if(position==1){
         holder.getTxtNombre().setText("Javi");
     }
+    */
 
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return this.getContenidoLista().size();// decimos que pinte tantas columnas de dos en dos como pusimos antes como size sea del arraylist
     } //extendemos del padre genérico adapter.
     //Necesitamos que recoja datos de tipo VH--> View Holder que es un dataholder basicamente que contiene los datos de la colección
 
 
+    public ArrayList<String> getContenidoLista() {
+        return contenidoLista;
+    }
+
+    public void setContenidoLista(ArrayList<String> contenidoLista) {
+        this.contenidoLista = contenidoLista;
+    }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView txtNombre;
