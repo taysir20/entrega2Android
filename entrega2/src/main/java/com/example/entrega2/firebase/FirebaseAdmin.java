@@ -1,7 +1,9 @@
 package com.example.entrega2.firebase;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.DatePicker;
 
 
@@ -13,8 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by tay on 25/11/17.
@@ -27,9 +32,11 @@ public class FirebaseAdmin {
     private DatabaseReference myRef;
     private FirebaseAdminListener firebaseAdminListener;
 
+
     public FirebaseAdmin() {
 
         this.onCreate();
+
     }
 
     public void onCreate() {
@@ -40,7 +47,8 @@ public class FirebaseAdmin {
 
     public void initDataBase() {
         this.setDatabase(FirebaseDatabase.getInstance());
-        this.setMyRef(database.getReference("message"));
+        this.setMyRef(database.getReference("Coches"));
+        this.readData();
     }
 
     public FirebaseAuth getmAuth() {
@@ -108,7 +116,9 @@ public class FirebaseAdmin {
                             if (task.isSuccessful()) {
 
                                 System.out.println("dentroDelOnComplete");
+
                                 firebaseAdminListener.loginIsOk(true);
+                               // initDataBase();
 
                             }
                         }
@@ -122,6 +132,26 @@ public class FirebaseAdmin {
         System.out.println(firebaseAdminListener);
        firebaseAdminListener.signOutOk(true);
 
+    }
+
+    public void readData(){
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                System.out.println("xxxxxx" + value + "xxxxxxx");
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
     }
 
 }

@@ -5,8 +5,10 @@
 
     <TextView
         android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="TextView"
+        android:textAlignment="center" />
 </LinearLayout>
