@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity{
         transition.commit();
     }
 
-    public void estaslog(){
-
-    }
 
     public LoginFragment getLoginFragment() {
         return loginFragment;

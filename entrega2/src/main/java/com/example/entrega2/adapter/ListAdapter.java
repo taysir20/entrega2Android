@@ -1,4 +1,5 @@
-package com.example.mylib.fragment;
+package com.example.entrega2.adapter;
+
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.mylib.R;
+
+import com.example.entrega2.R;
+import com.example.entrega2.entity.Coche;
 
 import java.util.ArrayList;
 
@@ -15,10 +18,11 @@ import java.util.ArrayList;
  */
 
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
-    private ArrayList<String> contenidoLista; //declaramos un array que contiene contenido que queremos que s epinte en las celdas de la lista
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
+    private ArrayList<Coche> contenidoLista; //declaramos un array que contiene contenido que queremos que s epinte en las celdas de la lista
 
-    public ListAdapter(ArrayList<String> contenidoLista) {
+    public ListAdapter(ArrayList<Coche> contenidoLista) {
+        System.out.println("contenidoLista: " + contenidoLista);
         this.contenidoLista = contenidoLista;
     }
 
@@ -35,8 +39,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {//pinta el contenido de los elementos de la celda a través del molde y para cada posición de las celda.
-            holder.getTxtNombre().setText(this.getContenidoLista().get(position)); // por cada posición se pinta una posición del arraylist
-
+        // holder.getTxtNombre().setText(this.getContenidoLista().get(position)); // por cada posición se pinta una posición del arraylist
+        holder.getTxtMarca().setText(this.getContenidoLista().get(position).marca);
+        holder.getTxtModelo().setText(this.getContenidoLista().get(position).modelo);
 
 
     /*if(position==0){
@@ -55,27 +60,38 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
     //Necesitamos que recoja datos de tipo VH--> View Holder que es un dataholder basicamente que contiene los datos de la colección
 
 
-    public ArrayList<String> getContenidoLista() {
+    public ArrayList<Coche> getContenidoLista() {
         return contenidoLista;
     }
 
-    public void setContenidoLista(ArrayList<String> contenidoLista) {
+    public void setContenidoLista(ArrayList<Coche> contenidoLista) {
         this.contenidoLista = contenidoLista;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtNombre;
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView txtMarca;
+        public TextView txtModelo;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.txtNombre = (TextView) itemView.findViewById(R.id.txtNombre);
+            this.txtMarca = (TextView) itemView.findViewById(R.id.txtMarca);
+            this.txtModelo = (TextView) itemView.findViewById(R.id.txtModelo);
         }
 
-        public TextView getTxtNombre() {
-            return txtNombre;
+        public TextView getTxtMarca() {
+            return txtMarca;
         }
 
-        public void setTxtNombre(TextView txtNombre) {
-            this.txtNombre = txtNombre;
+        public void setTxtMarca(TextView txtMarca) {
+            this.txtMarca = txtMarca;
+        }
+
+        public TextView getTxtModelo() {
+            return txtModelo;
+        }
+
+        public void setTxtModelo(TextView txtModelo) {
+            this.txtModelo = txtModelo;
         }
     }
 }

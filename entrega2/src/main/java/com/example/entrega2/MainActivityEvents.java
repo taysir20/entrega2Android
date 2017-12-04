@@ -9,6 +9,7 @@ import com.example.mylib.fragment.RegisterFragmentListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DataSnapshot;
 
 /**
  * Created by tay on 21/11/17.
@@ -70,6 +71,11 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
 
     @Override
     public void signOutOk(boolean ok) {
+
+    }
+
+    @Override
+    public void downloadBranch(String branch, DataSnapshot dataSnapshot) {
 
     }
 }

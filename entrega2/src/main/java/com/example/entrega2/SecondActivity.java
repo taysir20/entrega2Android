@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.entrega2.adapter.ListAdapter;
 import com.example.entrega2.firebase.FirebaseAdmin;
 import com.example.mylib.fragment.ListFragment;
+
+import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
     private TextView lblBievenida;
     private Button btnLogOut;
     private SecondActivityEvents events;
-    private FirebaseAdmin firebaseAdmin;
     private ListFragment listFragment;
 
 
@@ -20,16 +22,30 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        firebaseAdmin = new FirebaseAdmin();
         this.lblBievenida = this.findViewById(R.id.lblBienvenida);
         this.btnLogOut = this.findViewById(R.id.btnLogOut);
         this.lblBievenida.setText(R.string.lblBienvenida);
         this.btnLogOut.setText(R.string.btnLogOut);
         events = new SecondActivityEvents(this);
-        firebaseAdmin.setFirebaseAdminListener(events);
+        DataHolder.MyDataHolder.getFirebaseAdmin().setFirebaseAdminListener(events);
+        /*
+        Para no perder la referencia a firebaseAdmin dado que de un activity a otro todo pasa a null,
+        entonces lo guardamos en el dataHolder y se desde el second activity lo llamamos y decimos que sobrescriba
+        los eventos que escucha dado qeu ahora escuchará los del second activity.
+         */
         this.btnLogOut.setOnClickListener(events);
         this.listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentList);
-
+       /* ArrayList<String> contenidoLista = new ArrayList<>(); // este array lo creamos de forma manual, pero a posteriori lo que haremos es descargarlo de firebase
+        contenidoLista.add("Yony");
+        contenidoLista.add("Javier");
+        contenidoLista.add("Ramsés");
+        contenidoLista.add("Sergio");
+        contenidoLista.add("Oscar");
+        contenidoLista.add("Manuel");
+        contenidoLista.add("Taysir");
+       this.listFragment.getMyLista().setAdapter(new ListAdapter(contenidoLista)); // pasamos por parámetro el arrayList creado para inicializar el arrayList del listAdapter
+        */
+       DataHolder.MyDataHolder.getFirebaseAdmin().downloadDataAndObserveBranchChanges("Coches"); // llamo al métood de descarga con la rama que quiero que observe a partir de la raíz.
     }
 
     public TextView getLblBievenida() {
@@ -56,13 +72,6 @@ public class SecondActivity extends AppCompatActivity {
         this.events = events;
     }
 
-    public FirebaseAdmin getFirebaseAdmin() {
-        return firebaseAdmin;
-    }
-
-    public void setFirebaseAdmin(FirebaseAdmin firebaseAdmin) {
-        this.firebaseAdmin = firebaseAdmin;
-    }
 
     public ListFragment getListFragment() {
         return listFragment;

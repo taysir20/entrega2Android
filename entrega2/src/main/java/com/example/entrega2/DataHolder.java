@@ -12,7 +12,6 @@ public class DataHolder {
 
     public static class MyDataHolder {
         public static FirebaseAdmin firebaseAdmin;
-        //private static FirebaseDatabase firebaseDatabase;
 
         public static FirebaseAdmin getFirebaseAdmin() {
             return firebaseAdmin;
@@ -21,15 +20,7 @@ public class DataHolder {
         public static void setFirebaseAdmin(FirebaseAdmin firebaseAdmin) {
             MyDataHolder.firebaseAdmin = firebaseAdmin;
         }
-        /*
-        public static FirebaseDatabase getFirebaseDatabase() {
-            return firebaseDatabase;
-        }
 
-        public static void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
-            MyDataHolder.firebaseDatabase = firebaseDatabase;
-        }
-        */
     }
 
 

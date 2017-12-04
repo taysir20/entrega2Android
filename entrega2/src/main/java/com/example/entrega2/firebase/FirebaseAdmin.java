@@ -1,5 +1,6 @@
 package com.example.entrega2.firebase;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
@@ -31,11 +32,14 @@ public class FirebaseAdmin {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private FirebaseAdminListener firebaseAdminListener;
+    private  DatabaseReference myChildRef;
+    private ValueEventListener valueEventListene=null;
 
 
     public FirebaseAdmin() {
 
         this.onCreate();
+        this.initDataBase();
 
     }
 
@@ -47,8 +51,7 @@ public class FirebaseAdmin {
 
     public void initDataBase() {
         this.setDatabase(FirebaseDatabase.getInstance());
-        this.setMyRef(database.getReference("Coches"));
-        this.readData();
+        this.setMyRef(database.getReference()); // se puede especificar la subraiz, si no ponemos nada entonces hacemos referencia a la raiz.
     }
 
     public FirebaseAuth getmAuth() {
@@ -82,6 +85,22 @@ public class FirebaseAdmin {
 
     public void setFirebaseAdminListener(FirebaseAdminListener firebaseAdminListener) {
         this.firebaseAdminListener = firebaseAdminListener;
+    }
+
+    public DatabaseReference getMyChildRef() {
+        return myChildRef;
+    }
+
+    public void setMyChildRef(DatabaseReference myChildRef) {
+        this.myChildRef = myChildRef;
+    }
+
+    public ValueEventListener getValueEventListene() {
+        return valueEventListene;
+    }
+
+    public void setValueEventListene(ValueEventListener valueEventListene) {
+        this.valueEventListene = valueEventListene;
     }
 
     public void createUserWithEmailAndPassword(String emailAddress, String password) {
@@ -128,27 +147,51 @@ public class FirebaseAdmin {
 
 
     public void logOut() {
+        myChildRef.removeEventListener(valueEventListene);
         this.getmAuth().signOut();
+        firebaseAdminListener.signOutOk(true);
         System.out.println(firebaseAdminListener);
-       firebaseAdminListener.signOutOk(true);
+
 
     }
 
-    public void readData(){
+    public void downloadDataAndObserveBranchChanges(final String branch){ // este método observa cambios y los actualiza es decir vuelve a descargar el elemento que ha sufrido un cambio en la bbdd
+     myChildRef = this.getMyRef().child(branch);
+    /*
+    Cuando hemos inicializado el DatabaseReference myRef hemos puesto por defecto que se observe a la raíz del proyecto
+    firebase. También hemos dicho que s epuede especificar la subrais escribiendola como string de parámetro de "getReference()",
+    pero para nosotros será mejor recibir una rama por parámetro que será hija de la raíz de esta manera podemos recibir deistintas
+    ramas en vez de tener que depender siempre de la declarada inicialmente.
+
+     */
         // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        // en vez de hacer myRef.addValueListener que seríoa la raíz pasamos la rama hija que hemos recibido por parámetro
+         valueEventListene = myChildRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
+                /*String value = dataSnapshot.getValue(String.class);
                 System.out.println("xxxxxx" + value + "xxxxxxx");
+                */
+
+                firebaseAdminListener.downloadBranch(branch, dataSnapshot);
+                /*
+                En vez de coger aquí el value del snapshot y castearlo a un objeto con el que se pueda trabajar,
+                lo que haremos es llamar a todos los que implementen el método dwnloadBranch y les pasaremos
+                este snapshot para que trabajen y lo castean como ellos quieras.
+                Esto sirve para optimizar nuestro programa dado que si el casteo lo hiciesemos aquí, estaríamos
+                obligados a usar siempre un objeto de un mismo tipo.
+                En nuestro caso como la la lista está en el secondActivity, entonces será a quí donde recibiremos
+                tanto la rama como el snapshot y trabajaremos con él.
+                 */
+
 
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
+                firebaseAdminListener.downloadBranch(branch, null);
 
             }
         });

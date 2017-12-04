@@ -31,9 +31,12 @@ public class ListFragment extends Fragment {
         myLista = (RecyclerView) view.findViewById(R.id.myList);
         //Le seteamos al RecyclerView un Layout. En este caso le seteamos por ejemplo un GridLayout
         //Al ser un recyclerView puedo poner cualquier tipo de elemento.
+        System.out.println("esto si");
         myLista.setLayoutManager(new GridLayoutManager(getContext(),2)); // spanCount es el número de columnas. Esto hace directamente que sea una colección, dado que una tabla solo tiene una columna.
+        System.out.println("y esto??");
         //Ahora creamos un adapter que va a ser el encargado de rellenar con datos la colección.
         //Creamos el  nuevo ListAdapter y pintara todo el contenido de list Adapter
+        /*
         ArrayList<String> contenidoLista = new ArrayList<String>(); // este array lo creamos de forma manual, pero a posteriori lo que haremos es descargarlo de firebase
         contenidoLista.add("Yony");
         contenidoLista.add("Javier");
@@ -43,7 +46,7 @@ public class ListFragment extends Fragment {
         contenidoLista.add("Manuel");
         contenidoLista.add("Taysir");
         myLista.setAdapter(new ListAdapter(contenidoLista)); // pasamos por parámetro el arrayList creado para inicializar el arrayList del listAdapter
-
+        */
         return view;
     }
 
