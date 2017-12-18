@@ -33,16 +33,16 @@ public class MainActivity extends AppCompatActivity{
         //Con la operación add especificamos el contenedor donde queremos meter el fragment, el fragment que queremos meter y un identificador para es fragment
         transaction.add(R.id.loginLayout, this.getLoginFragment(), "loginFragment");
         transaction.add(R.id.registerLayout, this.getRegisterFragment(), "registerFragment");
-
-
         event = new MainActivityEvents(this);
+        //Establecemos los escuchadores
+        //El events del main activity va a estar escuchando a el firebaseadmin, al login fragment y al register fragment
         firebaseAdmin.setFirebaseAdminListener(event);
         this.loginFragment.setLoginFragmentListener(event);
         this.registerFragment.setRegisterFragmentListener(event);
         transaction.hide(this.getRegisterFragment());
         transaction.show(this.getLoginFragment());
         transaction.commit(); // comiteamos
-/*
+        /*
         android.support.v4.app.FragmentTransaction transition = this.getSupportFragmentManager().beginTransaction();
         transition.hide(this.getRegisterFragment());
         transition.commit();

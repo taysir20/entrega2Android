@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/4yony4-dampmiapp2-0a83372034f1.iml" filepath="$PROJECT_DIR$/4yony4-dampmiapp2-0a83372034f1.iml" />
       <module fileurl="file://$PROJECT_DIR$/entrega2/entrega2.iml" filepath="$PROJECT_DIR$/entrega2/entrega2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examenAndroid/examenAndroid.iml" filepath="$PROJECT_DIR$/examenAndroid/examenAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/mylib/mylib.iml" filepath="$PROJECT_DIR$/mylib/mylib.iml" />
     </modules>
   </component>
