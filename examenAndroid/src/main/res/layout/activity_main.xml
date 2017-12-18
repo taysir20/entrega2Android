@@ -12,20 +12,20 @@ contendrán un fragment
 -->
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/layoutPrincipal"
+        android:id="@+id/layoutPadre"
         android:name="com.example.mylib.fragment.ListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
-            android:id="@+id/registerLayout"
+            android:id="@+id/regLayout"
             android:name="com.example.mylib.fragment.RegisterFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
-            android:id="@+id/loginLayout"
+            android:id="@+id/logLayout"
             android:name="com.example.mylib.fragment.LoginFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
           estamos a la propia clase MainActivity
          */
         this.setMainActivityEvents(new MainActivityEvents(this));
+        //Instanciación de los fragmentos
+        this.setLoginFragment(new LoginFragment());
+        this.setRegisterFragment(new RegisterFragment());
         /*
         En un principio  asignabamos directamente a cada variable de un fragment su correspondiente XML con el método
         propio de las views llamado "findViewByid()" y haciendo uso del fichero id al que se accede por R..id.idAsignada.
@@ -41,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
         que contendrá a su vez linearLayouts hijas las cuáles cada una tendrá un fragment.
         De esta forma, podremos gestionar estos fragmentos (añadirlos, borrarlos,etc). Este linearLayout se ecuentra creado
         desde el XML del mainActivity.
-        Por último, para poder añadir dichos fragments al layout utilizaremos una transacción para operar estas acciones.
+        Por último, para poder añadir dichos fragments a su correspondiente layout utilizaremos una transacción para operar con estas acciones.
         Las transacciones contienen el método  getSupportFragmentManager().beginTransaction() que permite administrar
         fragmentos e iniciar una transacción.
 
          */
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         //Con la operación add especificamos el contenedor donde queremos meter el fragment, el fragment que queremos meter y un identificador para ese fragment
-        transaction.add(R.id.loginLayout, this.getLoginFragment(), "logFragment");
-        transaction.add(R.id.registerLayout, this.getRegisterFragment(), "regFragment");
+        transaction.add(R.id.logLayout, this.getLoginFragment(), "logFragment");
+        transaction.add(R.id.regLayout, this.getRegisterFragment(), "regFragment");
         /*
         Ahora establecemos el esuchador de los eventos que ocurran en los fragments.
         Cada fragment tiene su propio events, pero todos ellos llamarán mediante sus correspondientes listener (variables de las interfaces)
