@@ -1,13 +1,17 @@
 package com.example.entrega2.adapter;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.entrega2.R;
 import com.example.entrega2.entity.Coche;
 
@@ -18,12 +22,14 @@ import java.util.ArrayList;
  */
 
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private ArrayList<Coche> contenidoLista; //declaramos un array que contiene contenido que queremos que s epinte en las celdas de la lista
-
-    public ListAdapter(ArrayList<Coche> contenidoLista) {
+    private ListAdapterListener listAdapterListener; // declaramos el listener del ListAdapter para recibir los eventos cuando pinchamos una celda
+    private Context context; // esta variable la creamos dado que la librería Glide para cargar imagenes desde firebase necesita una variable de tipo contexto
+    public ListAdapter(ArrayList<Coche> contenidoLista, Context context) { // ListAdapter recibe como parámetro el context de Glide, en nuestro caso el contexto es el padre donde se encuentra que al fin de cuentas el list se encuentra en el second Activity
         System.out.println("contenidoLista: " + contenidoLista);
         this.contenidoLista = contenidoLista;
+        this.context = context;
     }
 
     @Override
@@ -42,6 +48,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         // holder.getTxtNombre().setText(this.getContenidoLista().get(position)); // por cada posición se pinta una posición del arraylist
         holder.getTxtMarca().setText(this.getContenidoLista().get(position).marca);
         holder.getTxtModelo().setText(this.getContenidoLista().get(position).modelo);
+        holder.setListAdapterListener(listAdapterListener);
+        /*
+        En glide, tenemos una función que recibe por parámetro la url de la imagen, la descarga y la
+        introduce en la caché. Po último, la sete a la variable img que tengamos declarada.
+         */
+        Glide.with(this.getContext()).load(this.getContenidoLista().get(position).urlImg).into(holder.getImageViewCoche());
 
 
     /*if(position==0){
@@ -68,30 +80,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         this.contenidoLista = contenidoLista;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtMarca;
-        public TextView txtModelo;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            this.txtMarca = (TextView) itemView.findViewById(R.id.txtMarca);
-            this.txtModelo = (TextView) itemView.findViewById(R.id.txtModelo);
-        }
-
-        public TextView getTxtMarca() {
-            return txtMarca;
-        }
-
-        public void setTxtMarca(TextView txtMarca) {
-            this.txtMarca = txtMarca;
-        }
-
-        public TextView getTxtModelo() {
-            return txtModelo;
-        }
-
-        public void setTxtModelo(TextView txtModelo) {
-            this.txtModelo = txtModelo;
-        }
+    public ListAdapterListener getListAdapterListener() {
+        return listAdapterListener;
     }
+
+    public void setListAdapterListener(ListAdapterListener listAdapterListener) {
+        this.listAdapterListener = listAdapterListener;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+
 }

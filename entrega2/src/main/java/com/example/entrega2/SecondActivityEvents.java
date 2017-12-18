@@ -3,9 +3,14 @@ package com.example.entrega2;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.entrega2.adapter.ListAdapter;
+import com.example.entrega2.adapter.ListAdapterListener;
+import com.example.entrega2.adapter.MyViewHolder;
 import com.example.entrega2.entity.Coche;
 import com.example.entrega2.firebase.FirebaseAdminListener;
 import com.example.mylib.fragment.ListFragment;
@@ -23,7 +28,7 @@ import java.util.ArrayList;
  * Created by tay on 25/11/17.
  */
 
-public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener {
+public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener,ListAdapterListener {
 
     private SecondActivity secondActivity;
 
@@ -82,10 +87,23 @@ public class SecondActivityEvents implements View.OnClickListener, FirebaseAdmin
             //Tenemos que usar un GenericTypeIndicator dado que firebase devuelve los datos utlizando esta clase abstracta
             GenericTypeIndicator<ArrayList<Coche>> indicator = new GenericTypeIndicator<ArrayList<Coche>>(){};
             ArrayList<Coche> arrCoches = dataSnapshot.getValue(indicator);//desde el value podemos castearlo al tipo que queramos, en este caso lo casteamos al genericTypeIndicator
-            this.secondActivity.getListFragment().getMyLista().setAdapter(new ListAdapter(arrCoches));
-
+           ListAdapter listAdapter = new ListAdapter(arrCoches,this.getSecondActivity());
+            this.secondActivity.getListFragment().getMyLista().setAdapter(listAdapter);
+            listAdapter.setListAdapterListener(this);
 
         }
 
+    }
+
+    @Override
+    public void listAdapterCellClicked(MyViewHolder cell) {
+        System.out.println("estoy pinchando la celda: " + cell.getAdapterPosition());
+       /*
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(this.secondActivity.getWindow().getDecorView().getWidth() , 1000);
+        layoutParams.width=this.secondActivity.getWindow().getDecorView().getWidth();
+        layoutParams.height=this.secondActivity.getWindow().getDecorView().getHeight();
+        ImageView imageView = cell.getImageViewCoche();
+        imageView.setLayoutParams(layoutParams);
+        */
     }
 }

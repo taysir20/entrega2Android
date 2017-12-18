@@ -20,8 +20,9 @@ public class ListFragment extends Fragment {
     private RecyclerView myLista;
 
     public ListFragment() {
-        // Required empty public constructor
     }
+
+
 
 
     @Override
