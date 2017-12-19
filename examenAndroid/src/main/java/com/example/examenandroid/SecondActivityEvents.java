@@ -1,6 +1,7 @@
 package com.example.examenandroid;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.example.examenandroid.adapter.ListAdapter;
@@ -9,6 +10,7 @@ import com.example.examenandroid.adapter.ListViewHolderEvents;
 import com.example.examenandroid.adapter.MyViewHolder;
 import com.example.examenandroid.entity.Coche;
 import com.example.examenandroid.firebase.FirebaseAdminListener;
+import com.example.examenandroid.fragment.InfoCocheListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
 
@@ -18,7 +20,7 @@ import java.util.ArrayList;
  * Created by tay on 19/12/17.
  */
 
-public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener, ListAdapterListener{
+public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener, ListAdapterListener, InfoCocheListener{
 
 
     private SecondActivity secondActivity;
@@ -86,7 +88,9 @@ iniciará una transición al mainActivity
             Decimos al adapter que su escuchador de eventos será el secondActivityEvents, En el adapter cada celda tiene que tener el escuchador
             y por tanto a cada celda se le dirá que su escuchador es este escuchador SecondActivityEvents que hemos pasado
              */
+
             listAdapter.setListAdapterListener(this);
+            this.secondActivity.getInfoCoche().setContenidoLista(arrCoches);
 
         }
     }
@@ -95,5 +99,18 @@ iniciará una transición al mainActivity
     @Override
     public void listAdapterCellClicked(MyViewHolder cell) {
         System.out.println("estoy pinchando la celda: " + cell.getAdapterPosition());
+        FragmentTransaction transaction = this.getSecondActivity().getSupportFragmentManager().beginTransaction();
+        transaction.hide(this.secondActivity.getListFragment());
+        transaction.show((this.secondActivity.getInfoCoche()));
+        this.getSecondActivity().getInfoCoche().establecerContenido(cell.getAdapterPosition());
+        transaction.commit();
+    }
+
+    @Override
+    public void volverAtras() {
+        FragmentTransaction transaction = this.getSecondActivity().getSupportFragmentManager().beginTransaction();
+        transaction.hide(this.secondActivity.getInfoCoche());
+        transaction.show((this.secondActivity.getListFragment()));
+        transaction.commit();
     }
 }

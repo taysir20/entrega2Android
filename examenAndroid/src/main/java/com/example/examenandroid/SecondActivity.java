@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.examenandroid.fragment.InfoCoche;
 import com.example.mylib.fragment.ListFragment;
 
 public class SecondActivity extends AppCompatActivity {
@@ -13,6 +14,8 @@ public class SecondActivity extends AppCompatActivity {
     private SecondActivityEvents events;
     private ListFragment listFragment; //variable de la lista que se muestra
     private LinearLayout llContainer; //container que contiene el fragmentList
+    private InfoCoche infoCoche;
+    private LinearLayout llContainer2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +46,23 @@ public class SecondActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         //Con la operación add especificamos el contenedor donde queremos meter el fragment, el fragment que queremos meter y un identificador para es fragment
         transaction.add(this.getLlContainer().getId(), this.getListFragment(), "fragmentList");
-        transaction.commit(); // comiteamos
+
     /*
     Hay que tener en cuenta que si añadimos otro fragment al linearLayout este último sobrescribirá al primero por tanto para poder
     meter varios, lo mejor es crear distintos linearlayouts dentro un linearlayout padre.
     Cada linear layout hijo contendrá un fragment.
      */
+
+    /*
+    Vamos a crear un fragment que muestre la información de cada celda y que se muestre al pinchar sobre una celda
+     */
+    this.infoCoche = new InfoCoche();
+    this.infoCoche.setInfoCocheListener(events);
+    this.llContainer2 = this.findViewById(R.id.llContainer2);
+        transaction.add(llContainer2.getId(), this.getInfoCoche(), "fragmentInfo");
+        transaction.hide(this.infoCoche);
+        transaction.commit(); // comiteamos
+
         DataHolder.MyDataHolder.getFirebaseAdmin().downloadDataAndObserveBranchChanges("Coches"); // llamo al métood de descarga con la rama que quiero que observe a partir de la raíz.
 
     }
@@ -83,5 +97,21 @@ public class SecondActivity extends AppCompatActivity {
 
     public void setLlContainer(LinearLayout llContainer) {
         this.llContainer = llContainer;
+    }
+
+    public InfoCoche getInfoCoche() {
+        return infoCoche;
+    }
+
+    public void setInfoCoche(InfoCoche infoCoche) {
+        this.infoCoche = infoCoche;
+    }
+
+    public LinearLayout getLlContainer2() {
+        return llContainer2;
+    }
+
+    public void setLlContainer2(LinearLayout llContainer2) {
+        this.llContainer2 = llContainer2;
     }
 }

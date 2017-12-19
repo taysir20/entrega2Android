@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">ExamenAndroid</string>
     <string name="btnLogOut">Cerrar Sesion</string>
+    <string name="btnVolver">Volver</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
