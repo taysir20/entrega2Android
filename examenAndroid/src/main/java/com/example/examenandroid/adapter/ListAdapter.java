@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.examenandroid.R;
 import com.example.examenandroid.entity.Coche;
 
@@ -40,6 +41,11 @@ public class ListAdapter extends RecyclerView.Adapter<MyViewHolder>{ //extendemo
     public void onBindViewHolder(MyViewHolder holder, int position) {//pinta el contenido de los elementos de la celda a través del molde y para cada posición de las celda.
         holder.getTxtMarca().setText(this.getContenidoLista().get(position).marca);
         holder.getTxtModelo().setText(this.getContenidoLista().get(position).modelo);
+         /*
+        En glide, tenemos una función que recibe por parámetro la url de la imagen, la descarga y la
+        introduce en la caché. Po último, la sete a la variable img que tengamos declarada.
+         */
+        Glide.with(this.getContext()).load(this.getContenidoLista().get(position).urlImg).into(holder.getImageViewCoche());
 
     }
 
