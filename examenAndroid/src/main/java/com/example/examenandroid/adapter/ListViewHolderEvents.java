@@ -24,6 +24,10 @@ public class ListViewHolderEvents implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
+        /*
+        Cada vez que se pinche una celda entyonces se llamañra a quién tenga implementado el mñetodo listAdapterCellClicked
+        que en este caso es el SecondActivity
+         */
+        this.getMyViewHolder().getListAdapterListener().listAdapterCellClicked(this.getMyViewHolder());
     }
 }

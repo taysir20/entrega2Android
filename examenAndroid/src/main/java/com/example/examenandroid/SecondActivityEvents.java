@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.view.View;
 
 import com.example.examenandroid.adapter.ListAdapter;
+import com.example.examenandroid.adapter.ListAdapterListener;
+import com.example.examenandroid.adapter.ListViewHolderEvents;
+import com.example.examenandroid.adapter.MyViewHolder;
 import com.example.examenandroid.entity.Coche;
 import com.example.examenandroid.firebase.FirebaseAdminListener;
 import com.google.firebase.database.DataSnapshot;
@@ -15,7 +18,7 @@ import java.util.ArrayList;
  * Created by tay on 19/12/17.
  */
 
-public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener{
+public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener, ListAdapterListener{
 
 
     private SecondActivity secondActivity;
@@ -55,7 +58,7 @@ iniciará una transición al mainActivity
     public void registerOk(boolean ok) {
 
     }
-
+//Método apra cerrar sesión
     @Override
     public void signOutOk(boolean ok) {
         // Si se recibe un ok se realzia un intent para matar el secondActivity y dirigirnos de nuevo al maiActivity
@@ -65,7 +68,7 @@ iniciará una transición al mainActivity
             secondActivity.finish();
         }
     }
-
+//Método para la descarga de los datos de una rama de firebase
     @Override
     public void downloadBranch(String branch, DataSnapshot dataSnapshot) {
          /*
@@ -79,10 +82,18 @@ iniciará una transición al mainActivity
             ArrayList<Coche> arrCoches = dataSnapshot.getValue(indicator);//desde el value podemos castearlo al tipo que queramos, en este caso lo casteamos al genericTypeIndicator
             ListAdapter listAdapter = new ListAdapter(arrCoches,this.getSecondActivity());
             this.secondActivity.getListFragment().getMyLista().setAdapter(listAdapter);
-
+             /*
+            Decimos al adapter que su escuchador de eventos será el secondActivityEvents, En el adapter cada celda tiene que tener el escuchador
+            y por tanto a cada celda se le dirá que su escuchador es este escuchador SecondActivityEvents que hemos pasado
+             */
+            listAdapter.setListAdapterListener(this);
 
         }
     }
 
-
+// Método que recibe los onclicks de la lista
+    @Override
+    public void listAdapterCellClicked(MyViewHolder cell) {
+        System.out.println("estoy pinchando la celda: " + cell.getAdapterPosition());
+    }
 }

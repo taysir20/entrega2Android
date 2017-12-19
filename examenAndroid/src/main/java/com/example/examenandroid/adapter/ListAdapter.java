@@ -41,6 +41,7 @@ public class ListAdapter extends RecyclerView.Adapter<MyViewHolder>{ //extendemo
     public void onBindViewHolder(MyViewHolder holder, int position) {//pinta el contenido de los elementos de la celda a través del molde y para cada posición de las celda.
         holder.getTxtMarca().setText(this.getContenidoLista().get(position).marca);
         holder.getTxtModelo().setText(this.getContenidoLista().get(position).modelo);
+        holder.setListAdapterListener(listAdapterListener); // establecemos el escuchador del holder que será el secondActivityEvents
          /*
         En glide, tenemos una función que recibe por parámetro la url de la imagen, la descarga y la
         introduce en la caché. Po último, la sete a la variable img que tengamos declarada.

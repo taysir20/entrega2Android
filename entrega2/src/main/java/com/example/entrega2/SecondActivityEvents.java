@@ -89,6 +89,7 @@ public class SecondActivityEvents implements View.OnClickListener, FirebaseAdmin
             ArrayList<Coche> arrCoches = dataSnapshot.getValue(indicator);//desde el value podemos castearlo al tipo que queramos, en este caso lo casteamos al genericTypeIndicator
            ListAdapter listAdapter = new ListAdapter(arrCoches,this.getSecondActivity());
             this.secondActivity.getListFragment().getMyLista().setAdapter(listAdapter);
+
             listAdapter.setListAdapterListener(this);
 
         }

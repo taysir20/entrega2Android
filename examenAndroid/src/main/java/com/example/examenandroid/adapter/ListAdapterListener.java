@@ -5,4 +5,5 @@ package com.example.examenandroid.adapter;
  */
 
 public interface ListAdapterListener {
+    public void listAdapterCellClicked(MyViewHolder cell);
 }
