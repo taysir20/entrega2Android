@@ -2,6 +2,7 @@ package com.example.entrega2;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 
 import com.example.entrega2.firebase.FirebaseAdminListener;
 import com.example.mylib.fragment.LoginFragmentListener;
@@ -61,7 +62,7 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
     @Override
     public void registerOk(boolean ok) {
     if(ok){
-        android.support.v4.app.FragmentTransaction transition = mainActivity.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transition = mainActivity.getSupportFragmentManager().beginTransaction();
         transition.hide(mainActivity.getRegisterFragment());
         transition.show(mainActivity.getLoginFragment());
         transition.commit();

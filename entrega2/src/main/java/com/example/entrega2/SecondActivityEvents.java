@@ -66,8 +66,8 @@ public class SecondActivityEvents implements View.OnClickListener, FirebaseAdmin
 
     @Override
     public void signOutOk(boolean ok) {
-        System.out.println("eeebuehhhKitipasa: " + ok);
         if (ok) {
+
             Intent intent = new Intent(secondActivity, MainActivity.class);
             secondActivity.startActivity(intent);
             secondActivity.finish();

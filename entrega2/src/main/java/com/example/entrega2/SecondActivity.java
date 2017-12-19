@@ -29,14 +29,14 @@ public class SecondActivity extends AppCompatActivity {
         this.btnLogOut = this.findViewById(R.id.btnLogOut);
         this.lblBievenida.setText(R.string.lblBienvenida);
         this.btnLogOut.setText(R.string.btnLogOut);
-        events = new SecondActivityEvents(this);
+        events = new SecondActivityEvents(this);//instanciamos el events del secondActivity
         DataHolder.MyDataHolder.getFirebaseAdmin().setFirebaseAdminListener(events);
         /*
         Para no perder la referencia a firebaseAdmin dado que de un activity a otro todo pasa a null,
         entonces lo guardamos en el dataHolder y se desde el second activity lo llamamos y decimos que sobrescriba
         los eventos que escucha dado qeu ahora escuchará los del second activity.
          */
-        this.btnLogOut.setOnClickListener(events);
+        this.btnLogOut.setOnClickListener(events); // decimos que ekl escuchardor del onclick del btn de logout sea el SecondActivityEvents
 
         //this.listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentList);
         /*

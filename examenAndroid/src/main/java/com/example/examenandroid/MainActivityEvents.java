@@ -1,5 +1,6 @@
 package com.example.examenandroid;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 
 import com.example.examenandroid.firebase.FirebaseAdminListener;
@@ -59,21 +60,32 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
 
     @Override
     public void OnLoginClicked() {
-
+        //Recoge el email y password del loginFragment y se lo envía al registerUser del frirebaseAdmin
+        this.mainActivity.getFirebaseAdmin().signInWithEmailAndPassword(this.mainActivity.getLoginFragment().getTxtEmail().getText().toString(), this.mainActivity.getLoginFragment().getTxtPass().getText().toString());
     }
 
     @Override
     public void OnClickRegistered() {
-
+        //Recoge el email y password del registerfragment y se lo envía al createUser del frirebaseAdmin
+        this.mainActivity.getFirebaseAdmin().createUserWithEmailAndPassword(this.mainActivity.getRegisterFragment().getTxtEmail().getText().toString(), this.mainActivity.getRegisterFragment().getTxtPass().getText().toString());
     }
 
     @Override
     public void loginIsOk(boolean ok) {
+        //si llega un ok=true desde el registerUser de firebaseadmin se realiza un intent para pasar del mainActivity al secondActivity
+        //Matando el mainActivity
+        if(ok){
+            Intent intent = new Intent(this.getMainActivity(), SecondActivity.class);
+            this.getMainActivity().startActivity(intent);
+            this.getMainActivity().finish();
+
+        }
 
     }
 
     @Override
     public void registerOk(boolean ok) {
+        System.out.println("pruebbaaaaaaaaaaaaaa");
         /*
         Si llega un true deasde el método de registro del firebaseAdmin entonces a través del gestor de fragmentos
         vamos a realizar la transición del registerFragment al loginFragment
@@ -81,8 +93,8 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
          */
         if(ok){
             FragmentTransaction transition = mainActivity.getSupportFragmentManager().beginTransaction();
-            transition.hide(mainActivity.getRegisterFragment());
-            transition.show(mainActivity.getLoginFragment());
+            transition.hide(this.getMainActivity().getRegisterFragment());
+            transition.show(this.getMainActivity().getLoginFragment());
             transition.commit();
         }
 

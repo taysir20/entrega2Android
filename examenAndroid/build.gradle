@@ -37,7 +37,8 @@ dependencies {
     /*
     Implementamos firebase Auth para la autentificación, core para y database para el manejo de la bbdds
      */
-    implementation 'com.google.firebase:firebase-auth:11.0.4'
+    compile 'com.google.firebase:firebase-auth:11.0.4'
+    //implementation 'com.google.firebase:firebase-auth:11.0.4'
     compile 'com.google.firebase:firebase-core:11.0.4'
     compile 'com.google.firebase:firebase-database:11.0.4'
 }
