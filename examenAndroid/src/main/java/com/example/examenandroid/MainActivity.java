@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
          entonces se instanciará la variable Auth con la que vamos a trabajar para el registro y logueo de usuarios.
           */
         this.setFirebaseAdmin(new FirebaseAdmin());
+        //Decimos a la clase FirebaseAdmin quién será su escuchador, en este caso MainActivityEvents esuchará por todos los eventos de FirebaseAdmin
+        this.getFirebaseAdmin().setFirebaseAdminListener(this.getMainActivityEvents());
         this.setMainActivityEvents(new MainActivityEvents(this));
         //Instanciación de los fragmentos
         this.setLoginFragment(new LoginFragment());

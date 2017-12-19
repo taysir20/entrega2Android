@@ -2,6 +2,7 @@ package com.example.examenandroid;
 
 import android.support.v4.app.FragmentTransaction;
 
+import com.example.examenandroid.firebase.FirebaseAdminListener;
 import com.example.mylib.fragment.LoginFragmentListener;
 import com.example.mylib.fragment.RegisterFragmentListener;
 
@@ -11,8 +12,9 @@ import com.example.mylib.fragment.RegisterFragmentListener;
 
 /*
 Vamos a hacer que implemente los métodos de los dragment mediante las interfaces loginFragmentlistener y registerFragmentListener
+Añadimos el implements del FirebaseAdminListener pues el mainActivityEvents recibirá las notificaciones de ok del firebaseAmin
  */
-public class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener { //
+public class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener, FirebaseAdminListener{ //
     /*
     Declaramos y recibimos por parámetro la variable de tipo MainActivity pues ciertas acciones,
     requerirán de la llamada de esta activity
@@ -62,6 +64,21 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
 
     @Override
     public void OnClickRegistered() {
+
+    }
+
+    @Override
+    public void loginIsOk(boolean ok) {
+
+    }
+
+    @Override
+    public void registerOk(boolean ok) {
+
+    }
+
+    @Override
+    public void signOutOk(boolean ok) {
 
     }
 }

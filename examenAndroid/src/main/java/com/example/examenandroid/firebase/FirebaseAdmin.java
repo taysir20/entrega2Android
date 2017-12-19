@@ -61,5 +61,4 @@ public class FirebaseAdmin {
     public void setFirebaseAdminListener(FirebaseAdminListener firebaseAdminListener) {
         this.firebaseAdminListener = firebaseAdminListener;
     }
-
 }
