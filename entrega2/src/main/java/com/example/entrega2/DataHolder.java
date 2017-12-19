@@ -22,7 +22,7 @@ public class DataHolder {
         public static void setFirebaseAdmin(FirebaseAdmin firebaseAdmin) {
             MyDataHolder.firebaseAdmin = firebaseAdmin;
         }
-     /*Para pdoer reciclar el fragmenList podemos llamar ald ataholder desde otro activity y llamarlo,
+     /*Para poder reciclar el fragmenList podemos llamar al dataholder desde otro activity y llamarlo,
         si no existe instancia porque previamente no lo guardamos o nunca se ha creado se hará una nueva
         instancia. En este momento no hago uso de ello pero lo dejo para tenerlo para futuras entregas en las
         que si pueda hacer uso de ello.

@@ -44,12 +44,15 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
     a quién implementa los métodos de la interfaz de loginFragmentListener. Este MainacxtivityEvents implementa este método
     y por lo tanto se llama a este método en el que nos encontramos y realizamos la transición inversa es decir si al principio
     mostrabamos el loginFragment y ocultabamos el registerFragment, ahora lo hacmos al revés para que muestre el fragment del
-    registro
+    registro.
+    ¿Por qué el MainActivityEvents se encarga de llevar a cabo en última instancia todos los eventos de los fragments?
+    Basicamente, para no limitarnos al uso del los events de los fragments y de esta manera reciclar estos fragmentos desde
+    la librería pues si los fragments se encargan de realizar los eventos entonces solo valdrían para ese fragment.
      */
         FragmentTransaction transition = mainActivity.getSupportFragmentManager().beginTransaction();
         transition.hide(this.getMainActivity().getLoginFragment());
         transition.show(this.getMainActivity().getRegisterFragment());
-        transition.commit();
+        transition.commit(); // comiteamos para que se lleve  a cambo la transacción
     }
 
     @Override

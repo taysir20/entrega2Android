@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.examenandroid.firebase.FirebaseAdmin;
 import com.example.mylib.fragment.LoginFragment;
 import com.example.mylib.fragment.RegisterFragment;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     del MainActivity.
      */
     private MainActivityEvents mainActivityEvents;
+    private FirebaseAdmin firebaseAdmin;//variable para manejar todas las acciones de Firebase
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
           Como el constructor debe de recibir el mainActivity, le pasamos mediante "this" el propio MainActivity dado que
           estamos a la propia clase MainActivity
          */
+         /*
+         Hacemos el new del FirebaseAdmin para instanciarlo, y como el constructor del Admin llama al método oncreate
+         entonces se instanciará la variable Auth con la que vamos a trabajar para el registro y logueo de usuarios.
+          */
+        this.setFirebaseAdmin(new FirebaseAdmin());
         this.setMainActivityEvents(new MainActivityEvents(this));
         //Instanciación de los fragmentos
         this.setLoginFragment(new LoginFragment());
@@ -98,5 +105,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setMainActivityEvents(MainActivityEvents mainActivityEvents) {
         this.mainActivityEvents = mainActivityEvents;
+    }
+
+    public FirebaseAdmin getFirebaseAdmin() {
+        return firebaseAdmin;
+    }
+
+    public void setFirebaseAdmin(FirebaseAdmin firebaseAdmin) {
+        this.firebaseAdmin = firebaseAdmin;
     }
 }
