@@ -17,4 +17,6 @@ public interface FirebaseAdminListener {
 
     public void signOutOk(boolean ok);
 
+    public void downloadBranch(String branch, DataSnapshot dataSnapshot); // pasamos por parámetro la rama descargada para saber cuál es y de esta manera poder tener varias ramas de las que descargamos contenido
+
 }

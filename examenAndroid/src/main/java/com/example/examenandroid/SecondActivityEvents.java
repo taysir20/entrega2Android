@@ -3,6 +3,8 @@ package com.example.examenandroid;
 import android.content.Intent;
 import android.view.View;
 
+import com.example.examenandroid.adapter.ListAdapter;
+import com.example.examenandroid.entity.Coche;
 import com.example.examenandroid.firebase.FirebaseAdminListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
  */
 
 public class SecondActivityEvents implements View.OnClickListener, FirebaseAdminListener{
+
+
     private SecondActivity secondActivity;
 
     public SecondActivityEvents(SecondActivity secondActivity) {
@@ -59,6 +63,24 @@ iniciará una transición al mainActivity
             Intent intent = new Intent(secondActivity, MainActivity.class);
             secondActivity.startActivity(intent);
             secondActivity.finish();
+        }
+    }
+
+    @Override
+    public void downloadBranch(String branch, DataSnapshot dataSnapshot) {
+         /*
+        Por aquí pasaran todas las ramas y snapshots que obseervemos. Para elegir entre una rama u otra,
+        basta con usar un if/else
+         */
+        if(branch.equals("Coches")){
+            System.out.println("ldentro : " + branch);
+            //Tenemos que usar un GenericTypeIndicator dado que firebase devuelve los datos utlizando esta clase abstracta
+            GenericTypeIndicator<ArrayList<Coche>> indicator = new GenericTypeIndicator<ArrayList<Coche>>(){};
+            ArrayList<Coche> arrCoches = dataSnapshot.getValue(indicator);//desde el value podemos castearlo al tipo que queramos, en este caso lo casteamos al genericTypeIndicator
+            ListAdapter listAdapter = new ListAdapter(arrCoches,this.getSecondActivity());
+            this.secondActivity.getListFragment().getMyLista().setAdapter(listAdapter);
+
+
         }
     }
 

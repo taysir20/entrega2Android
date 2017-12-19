@@ -8,6 +8,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -33,11 +35,17 @@ public class FirebaseAdmin {
     public FirebaseAdmin() {
     //Desde el constructor del Admin vamos a llamar a un método oncreate para que instancie el FifrebaseAuth
         this.onCreate();
+        //llamos al método que inicializa la variable database y reference
+        this.initDataBase();
     }
 
     public void onCreate(){
         this.setmAuth(FirebaseAuth.getInstance()); // Para instanciar el Auth llamamos a la clase FirebaseAuth y realizamos un getInstance()
        DataHolder.MyDataHolder.setFirebaseAdmin(this); // guardamos el firebaseAdmin en el dataholder para poder volver a usarlo en otros activitys
+    }
+    public void initDataBase() {
+        this.setDatabase(FirebaseDatabase.getInstance());
+        this.setMyRef(database.getReference()); // se puede especificar la subraiz, si no ponemos nada entonces hacemos referencia a la raiz.
     }
 
     public FirebaseAuth getmAuth() {
@@ -127,7 +135,7 @@ un true. Este true lo recogerá el  mainActivityEvents y realizará la transici�
 
 
     public void logOut() {
-        //myChildRef.removeEventListener(valueEventListene);
+        myChildRef.removeEventListener(valueEventListene); // para cerrar la sesión hay que remover la reference del Listenerxs
         this.getmAuth().signOut();
         firebaseAdminListener.signOutOk(true);
         System.out.println(firebaseAdminListener);
@@ -135,4 +143,43 @@ un true. Este true lo recogerá el  mainActivityEvents y realizará la transici�
 
     }
 
+    public void downloadDataAndObserveBranchChanges(final String branch) { // este método observa cambios y los actualiza es decir vuelve a descargar el elemento que ha sufrido un cambio en la bbdd
+        myChildRef = this.getMyRef().child(branch);
+    /*
+    Cuando hemos inicializado el DatabaseReference myRef hemos puesto por defecto que se observe a la raíz del proyecto
+    firebase. También hemos dicho que s epuede especificar la subrais escribiendola como string de parámetro de "getReference()",
+    pero para nosotros será mejor recibir una rama por parámetro que será hija de la raíz de esta manera podemos recibir deistintas
+    ramas en vez de tener que depender siempre de la declarada inicialmente.
+
+     */
+        // Read from the database
+        // en vez de hacer myRef.addValueListener que sería la raíz pasamos la rama hija que hemos recibido por parámetro
+        valueEventListene = myChildRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+
+                firebaseAdminListener.downloadBranch(branch, dataSnapshot);
+                /*
+                En vez de coger aquí el value del snapshot y castearlo a un objeto con el que se pueda trabajar,
+                lo que haremos es llamar a todos los que implementen el método dwnloadBranch y les pasaremos
+                este snapshot para que trabajen y lo castean como ellos quieras.
+                Esto sirve para optimizar nuestro programa dado que si el casteo lo hiciesemos aquí, estaríamos
+                obligados a usar siempre un objeto de un mismo tipo.
+                En nuestro caso como la la lista está en el secondActivity, entonces será a quí donde recibiremos
+                tanto la rama como el snapshot y trabajaremos con él.
+                 */
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                firebaseAdminListener.downloadBranch(branch, null);
+
+            }
+        });
+    }
 }

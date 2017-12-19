@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ExamenAndroid</string>
-    <string name="btnLogOut">ExamenAndroid</string>
+    <string name="btnLogOut">Cerrar Sesion</string>
 </resources>

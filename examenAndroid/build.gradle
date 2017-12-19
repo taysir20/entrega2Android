@@ -34,6 +34,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':mylib') // Realizamos la implementación de nuestra librería
+    //Implementamos el recycler view porque sino, no podemos extender de él
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
     /*
     Implementamos firebase Auth para la autentificación, core para y database para el manejo de la bbdds
      */
