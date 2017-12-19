@@ -74,6 +74,17 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
 
     @Override
     public void registerOk(boolean ok) {
+        /*
+        Si llega un true deasde el método de registro del firebaseAdmin entonces a través del gestor de fragmentos
+        vamos a realizar la transición del registerFragment al loginFragment
+        Recordar que hay que realizar el commit siemrpe apra completar la transacción!
+         */
+        if(ok){
+            FragmentTransaction transition = mainActivity.getSupportFragmentManager().beginTransaction();
+            transition.hide(mainActivity.getRegisterFragment());
+            transition.show(mainActivity.getLoginFragment());
+            transition.commit();
+        }
 
     }
 

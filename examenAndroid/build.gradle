@@ -41,3 +41,8 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.0.4'
     compile 'com.google.firebase:firebase-database:11.0.4'
 }
+/*
+Para realizar la conexión a firebase necesitamos importar el plugin de google services
+ */
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
