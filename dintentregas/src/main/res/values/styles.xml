@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--
+    El fichero srtyle.xml sirve para coger temas ya existentes y usarlos
+    es decir aplicarlos a nuestra aplicación heredando dicho tema.
+    Para Heredar el tema en el atriobuto "parent" de la etiqueta "style"
+    especificamos el tema a heredar
+    Además dentro del tooBar como podemos ver, se puede espeficiar los colores
+    del ficheros colors.xml que queremos que use.git
+    -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>

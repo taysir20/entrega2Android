@@ -1,4 +1,4 @@
 //include ':app', ':miapp2'
-include ':mylib', ':entrega2', ':examenAndroid'
+include ':mylib', ':entrega2', ':examenAndroid', ':dintentregas'
 //include  ':mylib', ':entrega2'
 //include  ':mylib', ':examenAndroid'

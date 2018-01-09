@@ -1,0 +1,10 @@
+<resources>
+    <!--
+    Para definir strings que queremos dar a variables luego desde
+    el código java.
+    Se suele usar también para agregar los textos en distintos idiomas.
+    Esto se realiza creando dentro de string.xml otros estrings.xml que tengan
+    etiqueta string con el texto en un idioma determinado
+    -->
+    <string name="app_name">DintEntregas</string>
+</resources>
