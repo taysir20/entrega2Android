@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+Como podemos ver el Main Activity engloba tanto
+al toolBar como al contenido del como al botón
+flotante.
+Para ello en el activity_main.xml se encuentra el tag
+padre que es coordinatorLayout, en el cuál dentro de él
+se encuentra el tag que referencia al toolBar, el include
+del content_main.xml que es donde irá meteremos todo lo relacionado
+con el contenido de la aopp y el tag del botón flotante
+-->
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dintentregas.MainActivity">
+    tools:context="com.example.dintentregas.MainActivity"><!--Conexión bidireccional con Java que permite consultar El archivo MainActivity de Java desde el xml-->
+    <!-- Representa al TabLayout donde va el toolBar-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"> <!--desde style podemos importar un tema-->
+    <!--Representa el tabBar-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TextView
+    </android.support.design.widget.AppBarLayout>
+    <!--Con este include estamos metiendo el content_main.xml dentro del activity_main.xml,
+    por lo tanto sería lo mismo que copiar el código del content_main.xml aquí.
+    La ventaja es mostrar menos código en esta pantalla.
+    Este content_main.xml contiene el fragment que se fija desde aquí de forma
+    estática por lo que tiene como desventaja que no es tan facial administrarlo
+    pero en cambio es más compatible con otras versiones más antiguas de android.-->
+    <include layout="@layout/content_main" />
+    <!--Para especificar desde el archivo dimens.xml las dimensiones de los elementos, así como sus margenes-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" /> <!--Para especificar elr ecurso es decir la imagen usada de la carpeta drawable-->
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

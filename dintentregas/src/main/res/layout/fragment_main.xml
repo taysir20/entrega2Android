@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dintentregas.MainActivityFragment"
+    tools:showIn="@layout/activity_main">
+    <!--context:Conexion bilateral con el fichero java
+    showIn:especifica a quién pertenece, es decir el fragment_main apunta al activity_main.xml porque se encuentra dentro de él-->
+</android.support.constraint.ConstraintLayout>

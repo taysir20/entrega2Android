@@ -1,0 +1,4 @@
+<resources>
+    <!--El fichero dimens.xml sirve para espeficiar dimensiones como los margenes o el tamaño de los recursos(imgs-->
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
