@@ -19,7 +19,7 @@ con el contenido de la aopp y el tag del botón flotante
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"> <!--desde style podemos importar un tema-->
+       android:theme="@style/AppTheme.AppBarOverlay"> <!--desde style podemos importar un tema-->
     <!--Representa el tabBar-->
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -39,10 +39,11 @@ con el contenido de la aopp y el tag del botón flotante
     <!--Para especificar desde el archivo dimens.xml las dimensiones de los elementos, así como sus margenes-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/fab_size"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/margin_right"
         app:srcCompat="@android:drawable/ic_dialog_email" /> <!--Para especificar elr ecurso es decir la imagen usada de la carpeta drawable-->
 
 </android.support.design.widget.CoordinatorLayout>

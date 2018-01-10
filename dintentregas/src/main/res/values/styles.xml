@@ -22,7 +22,36 @@
     </style>
     <!--Por ejemplo, este tema podemos customizarlo agregandole etiquetas "item"-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+<!--
+Creamos 3 temas personalizados para cada fragment, desde cada xml de cada fragment se linkea cada estilo
+-->
+    <style name="AppTheme.MiTema1" parent="ThemeOverlay.AppCompat.Dark" >
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">22dp</item>
+        <item name="colorButtonNormal">@color/colorGreen</item>
+        <item name="android:textColor">@color/colorYellow</item>
+        <item name="android:background">@color/colorRed</item>
+    </style>
+    <style name="AppTheme.MiTema2" parent="ThemeOverlay.AppCompat.Dark" >
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22dp</item>
+        <item name="colorButtonNormal">@color/colorPurple</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:background">@color/colorGreen</item>
+    </style>
+    <style name="AppTheme.MiTema3" parent="ThemeOverlay.AppCompat.Dark" >
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">9dp</item>
+        <item name="colorButtonNormal">@color/colorRed</item>
+        <item name="android:textColor">@color/colorPurple</item>
+        <item name="android:background">@color/colorYellow</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
+
+
