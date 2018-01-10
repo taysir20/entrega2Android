@@ -43,7 +43,6 @@ con el contenido de la aopp y el tag del botón flotante
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/margin_right"
         app:srcCompat="@android:drawable/ic_dialog_email" /> <!--Para especificar elr ecurso es decir la imagen usada de la carpeta drawable-->
 
 </android.support.design.widget.CoordinatorLayout>

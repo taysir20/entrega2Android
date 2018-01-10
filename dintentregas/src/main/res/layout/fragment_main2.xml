@@ -5,7 +5,7 @@
     android:id="@+id/fragment3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="com.example.dintentregas.MainActivityFragment"
+    tools:context="com.example.dintentregas.Fragment1"
     android:theme="@style/AppTheme.MiTema2"
     tools:showIn="@layout/activity_main">
     <!--context:Conexion bilateral con el fichero java
@@ -22,7 +22,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108" />
 
     <Button
         android:id="@+id/button2"
@@ -34,8 +35,8 @@
         android:text="Button2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.797" />
+        app:layout_constraintVertical_bias="0.741" />
 </android.support.constraint.ConstraintLayout>

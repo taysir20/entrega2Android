@@ -10,38 +10,40 @@ mas ordenador el contenido
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dintentregas.MainActivityFragment"
+    tools:context="com.example.dintentregas.Fragment1"
     tools:showIn="@layout/activity_main">
     <!--context:Conexion bilateral con el fichero java
     showIn:especifica a quién pertenece, es decir el fragment_main apunta al activity_main.xml porque se encuentra dentro de él-->
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.example.dintentregas.MainActivityFragment"
-        android:layout_width="360dp"
-        android:layout_height="135dp"
+        android:name="com.example.dintentregas.Fragment1"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="60dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_main"
-        />
+        tools:layout="@layout/fragment_main" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fragment2"
-        android:name="com.example.dintentregas.MainActivityFragment2"
-        android:layout_width="360dp"
-        android:layout_height="135dp"
+        android:name="com.example.dintentregas.Fragment2"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@+id/fragment3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment"
         tools:layout="@layout/fragment_main2" />
@@ -50,19 +52,32 @@ mas ordenador el contenido
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fragment3"
-        android:name="com.example.dintentregas.MainActivityFragment3"
-        android:layout_width="360dp"
-        android:layout_height="135dp"
+        android:name="com.example.dintentregas.Fragment3"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment2"
         tools:layout="@layout/fragment_main3" />
+
+    <fragment
+        android:id="@+id/HelloWorldFragment"
+        android:name="com.example.dintentregas.HelloWorldFragment"
+        android:layout_width="325dp"
+        android:layout_height="299dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
