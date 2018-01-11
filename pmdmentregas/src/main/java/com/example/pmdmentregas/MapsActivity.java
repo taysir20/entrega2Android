@@ -19,8 +19,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        /*
+        Como podemos ver el propio MapsActivity agrega wl mapFragment mediante el
+        SupportMapFragment
+         */
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        /*
+        Por último mediante la función "getMapAsync", se espera a que se hayan cargado
+        todos los servicios de google maps.
+        Una vez que se hayan cargado entonces se procede a llamar al mñetodo "onMapReady"
+        dado que para trabajar con el mapa este debe de estar totalmente cargado.
+        Este método "onMapReady" de implementa mediante el listener "OnMapReadyCallback"
+         */
+
         mapFragment.getMapAsync(this);
     }
 
