@@ -18,12 +18,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.setFirebaseAdmin(new FirebaseAdmin());
         this.setMainActivityEvents(new MainActivityEvents(this));
+        this.getFirebaseAdmin().setFirebaseAdminListener(this.getMainActivityEvents());
        /*
        Mediante el método getSpportFragemntManagr que ya conocemos pues es un método exclusivo de clases
        que extienden AppCompatActivity vamos a asignar el componente MapFragment a la variable SupportMapFragment
         */
         this.mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapFragment);
+        this.mapFragment.getMapAsync(this.getMainActivityEvents()); // se setea el escuchador del mapa que es el events del main activity pues es quién lo implementa
+        /*Con esté método getMapAsync se espera a que se hayan cargado
+        todos los servicios de google maps.
+        Una vez que se hayan cargado entonces se procede a llamar al mñetodo "onMapReady"
+        dado que para trabajar con el mapa este debe de estar totalmente cargado.
+                Este método "onMapReady" de implementa mediante el listener "OnMapReadyCallback"
+         */
 
     }
 

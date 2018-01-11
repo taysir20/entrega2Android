@@ -20,13 +20,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         /*
-        Como podemos ver el propio MapsActivity agrega wl mapFragment mediante el
+        Como podemos ver el propio MapsActivity agrega el mapFragment mediante el
         SupportMapFragment
          */
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         /*
-        Por último mediante la función "getMapAsync", se espera a que se hayan cargado
+        Por último mediante la función "getMapAsync" que es el listener, se espera a que se hayan cargado
         todos los servicios de google maps.
         Una vez que se hayan cargado entonces se procede a llamar al mñetodo "onMapReady"
         dado que para trabajar con el mapa este debe de estar totalmente cargado.
@@ -51,8 +51,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
+        //Como podemos ver se crea una coordenada/posición
         LatLng sydney = new LatLng(-34, 151);
+        //Después se añade un marker es decir un pin/anotación en esa coordenada con un título
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //Po último, se establece que la cámara que sigue el centro del mapa se colo que justo en esa coordenada que hemos creado arriba
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

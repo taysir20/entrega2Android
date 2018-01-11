@@ -149,6 +149,7 @@ public class FirebaseAdmin {
 
     public void downloadDataAndObserveBranchChanges(final String branch){ // este método observa cambios y los actualiza es decir vuelve a descargar el elemento que ha sufrido un cambio en la bbdd
      myChildRef = this.getMyRef().child(branch);
+     System.out.println("La rama que llega al metodo del firebase: " + branch);
     /*
     Cuando hemos inicializado el DatabaseReference myRef hemos puesto por defecto que se observe a la raíz del proyecto
     firebase. También hemos dicho que s epuede especificar la subrais escribiendola como string de parámetro de "getReference()",
@@ -161,11 +162,13 @@ public class FirebaseAdmin {
          valueEventListene = myChildRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 /*String value = dataSnapshot.getValue(String.class);
                 System.out.println("xxxxxx" + value + "xxxxxxx");
                 */
+                System.out.println("he entrado al ondatachange");
 
                 firebaseAdminListener.downloadBranch(branch, dataSnapshot);
                 /*
@@ -183,6 +186,7 @@ public class FirebaseAdmin {
 
             @Override
             public void onCancelled(DatabaseError error) {
+                System.out.println("oncancelled entrado");
                 firebaseAdminListener.downloadBranch(branch, null);
 
             }
