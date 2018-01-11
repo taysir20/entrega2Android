@@ -1,0 +1,29 @@
+
+<!--Se trata del documento xml de la API de google maps para poder acceder mediante la key a los servicios
+de google maps.
+Accediento al link propuesto abajo, podemos generay la key necesaria
+-->
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=C9:E2:06:C1:A6:84:24:EA:2F:1F:F2:2D:D6:6B:37:C7:64:6D:14:3F%3Bcom.example.pmdmentregas
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    C9:E2:06:C1:A6:84:24:EA:2F:1F:F2:2D:D6:6B:37:C7:64:6D:14:3F
+
+    SHA-1 certificate fingerprint:
+    C9:E2:06:C1:A6:84:24:EA:2F:1F:F2:2D:D6:6B:37:C7:64:6D:14:3F
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBEbXa4p-dPDaMWWGdJQe0S6hp21pn6_fA</string>
+</resources>
