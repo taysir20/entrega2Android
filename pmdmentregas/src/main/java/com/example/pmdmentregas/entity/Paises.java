@@ -17,16 +17,16 @@ la latitud y longitud que hemos descargado de la base de datos.
 
 @IgnoreExtraProperties
 public class Paises {
-    public int latitud;
-    public int longitud;
+    public double lat;
+    public double lon;
     public String nombre;
 
     public Paises() {
     }
 
-    public Paises(int latitud, int longitud, String nombre) {
-        this.latitud = latitud;
-        this.longitud = longitud;
+    public Paises(double lat, double lon, String nombre) {
+        this.lat = lat;
+        this.lon = lon;
         this.nombre=nombre;
     }
 }
