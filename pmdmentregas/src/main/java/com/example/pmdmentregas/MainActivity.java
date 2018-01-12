@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 
+import com.example.mylib.GPSAdmin.GPSTrackerAdmin;
 import com.example.pmdmentregas.firebase.FirebaseAdmin;
 import com.google.android.gms.maps.SupportMapFragment;
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private InfoCiudadesFragment infoCiudadesFragment; // declaramos el fragmento de la información de las ciudades
     private Button btnTracker;
     private MostrarPosicionFragment mostrarPosicionFragment;
+    private GPSTrackerAdmin gpsTrackerAdmin; // creamos la variable del GPSTrackerAdmin para poder inicializarla
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,26 @@ public class MainActivity extends AppCompatActivity {
         transition.show(this.getMapFragment());
         transition.commit();
 
+         /*
+        LLamamos a un método creado por nosotros que inicialice el GPSTracker del lib y que pregunta si
+        se puede obtener la localización o no y si no se puede entonces que llame a la función de pedir permisos.
+         */
 
+        this.GPSTrackerInitialize();
+    }
+
+    public void GPSTrackerInitialize(){
+        this.setGpsTrackerAdmin(new GPSTrackerAdmin(this)); //inicializamos el GPSTrackerAdmin pasándole por parámetro el contexto que en este caso es el propio activity
+        /*
+        IMPORTANTE: El contexto para inicializarlo siempre debe de ser un activity
+         */
+        //Comprobamos que se puede obtener la localización en el caso contrario entonces se piden los permisos correspondientes.
+        if (this.getGpsTrackerAdmin().canGetLocation()){
+            System.out.println("La localización por primera vez es: " + this.getGpsTrackerAdmin().getLatitude() + " " + this.getGpsTrackerAdmin().getLongitude());
+        }else{
+            // Se llama a la función para pedir los permisos
+            this.getGpsTrackerAdmin().showSettingsAlert();
+        }
     }
 
     public MainActivityEvents getMainActivityEvents() {
@@ -100,5 +121,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setMostrarPosicionFragment(MostrarPosicionFragment mostrarPosicionFragment) {
         this.mostrarPosicionFragment = mostrarPosicionFragment;
+    }
+
+    public GPSTrackerAdmin getGpsTrackerAdmin() {
+        return gpsTrackerAdmin;
+    }
+
+    public void setGpsTrackerAdmin(GPSTrackerAdmin gpsTrackerAdmin) {
+        this.gpsTrackerAdmin = gpsTrackerAdmin;
     }
 }

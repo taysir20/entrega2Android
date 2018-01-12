@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mylib" />
+    package="com.example.mylib" >
+    <!--
+    Declaramos en el Manifest el acceso del GPS e internet para poder usarlos
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    </manifest>

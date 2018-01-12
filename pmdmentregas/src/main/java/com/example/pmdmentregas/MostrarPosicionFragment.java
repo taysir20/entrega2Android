@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.mylib.GPSAdmin.GPSTrackerAdmin;
 import com.google.android.gms.maps.SupportMapFragment;
 
 
@@ -23,6 +24,7 @@ public class MostrarPosicionFragment extends Fragment {
 
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,8 +36,11 @@ public class MostrarPosicionFragment extends Fragment {
         this.btnVolver.setOnClickListener(this.getMostrarPosicionFragmentEvents());
         this.mapFragmentPosicion = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragmentPosicion); // para que el frgment del mapa sea hijo del mostrarFragmentPoscion
         this.mapFragmentPosicion.getMapAsync(this.getMostrarPosicionFragmentEvents());
+
+
         return v;
     }
+
 
     public Button getBtnVolver() {
         return btnVolver;
@@ -68,4 +73,6 @@ public class MostrarPosicionFragment extends Fragment {
     public void setMapFragmentPosicion(SupportMapFragment mapFragmentPosicion) {
         this.mapFragmentPosicion = mapFragmentPosicion;
     }
+
+
 }
