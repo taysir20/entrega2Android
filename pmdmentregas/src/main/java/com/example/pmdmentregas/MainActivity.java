@@ -3,6 +3,7 @@ package com.example.pmdmentregas;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
 
 import com.example.pmdmentregas.firebase.FirebaseAdmin;
@@ -13,14 +14,19 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAdmin firebaseAdmin;
     private SupportMapFragment mapFragment; //creamos el SupportMapFragment que es más compatible que un MapFragment
     private InfoCiudadesFragment infoCiudadesFragment; // declaramos el fragmento de la información de las ciudades
+    private Button btnTracker;
+    private MostrarPosicionFragment mostrarPosicionFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.btnTracker = this.findViewById(R.id.btnTracker);
         this.setFirebaseAdmin(new FirebaseAdmin());
         this.setMainActivityEvents(new MainActivityEvents(this));
         this.getFirebaseAdmin().setFirebaseAdminListener(this.getMainActivityEvents());
+        this.btnTracker.setOnClickListener(this.getMainActivityEvents());
+        this.btnTracker.setText(R.string.btnTracker);
        /*
        Mediante el método getSpportFragemntManagr que ya conocemos pues es un método exclusivo de clases
        que extienden AppCompatActivity vamos a asignar el componente MapFragment a la variable SupportMapFragment
@@ -36,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
          */
        this.infoCiudadesFragment = (InfoCiudadesFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragmentInfo);
+       this.mostrarPosicionFragment = (MostrarPosicionFragment) getSupportFragmentManager().findFragmentById(R.id.trackerFragment);
         this.getInfoCiudadesFragment().setInfoCiudadesFragmentListener(this.getMainActivityEvents());
+        this.getMostrarPosicionFragment().setMostrarPosicionFragmentListener(this.getMainActivityEvents());
         FragmentTransaction transition = this.getSupportFragmentManager().beginTransaction();
         transition.hide(this.getInfoCiudadesFragment());
+        transition.hide(this.getMostrarPosicionFragment());
         transition.show(this.getMapFragment());
         transition.commit();
 
@@ -75,5 +84,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setInfoCiudadesFragment(InfoCiudadesFragment infoCiudadesFragment) {
         this.infoCiudadesFragment = infoCiudadesFragment;
+    }
+
+    public Button getBtnTracker() {
+        return btnTracker;
+    }
+
+    public void setBtnTracker(Button btnTracker) {
+        this.btnTracker = btnTracker;
+    }
+
+    public MostrarPosicionFragment getMostrarPosicionFragment() {
+        return mostrarPosicionFragment;
+    }
+
+    public void setMostrarPosicionFragment(MostrarPosicionFragment mostrarPosicionFragment) {
+        this.mostrarPosicionFragment = mostrarPosicionFragment;
     }
 }

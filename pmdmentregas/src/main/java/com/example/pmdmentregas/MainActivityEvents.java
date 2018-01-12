@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by tay on 11/1/18.
  */
 
-public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, InfoCiudadesFragmentListener{
+public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, InfoCiudadesFragmentListener, View.OnClickListener, MostrarPosicionFragmentListener{
 
 
     //Para implementar el onlick de los markers y realizar acciones es decir que detecte cuando hemos pinchado un pon usamos OnMarkerClickListener
@@ -206,6 +206,7 @@ Método implementado por el listener OnMarkerClickListener que entra cuando hemo
         FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
         transition.show(this.getMainActivity().getInfoCiudadesFragment());
         transition.hide(this.getMainActivity().getMapFragment());
+        this.getMainActivity().getBtnTracker().setVisibility(this.getMainActivity().getBtnTracker().GONE);
         transition.commit();
 
         return false;
@@ -216,6 +217,28 @@ Método implementado por el listener OnMarkerClickListener que entra cuando hemo
     public void pressBack() {
         FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
         transition.hide(this.getMainActivity().getInfoCiudadesFragment());
+        transition.show(this.getMainActivity().getMapFragment());
+        this.getMainActivity().getBtnTracker().setVisibility(this.getMainActivity().getBtnTracker().VISIBLE);
+        transition.commit();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.btnTracker){
+            FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
+            transition.hide(this.getMainActivity().getMapFragment());
+            this.getMainActivity().getBtnTracker().setVisibility(view.GONE);
+            transition.show(this.getMainActivity().getMostrarPosicionFragment());
+            transition.commit();
+
+        }
+    }
+
+    @Override
+    public void ocultarMostrarPoscionFragment() {
+        FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
+        transition.hide(this.getMainActivity().getMostrarPosicionFragment());
+        this.getMainActivity().getBtnTracker().setVisibility(this.getMainActivity().getBtnTracker().VISIBLE);
         transition.show(this.getMainActivity().getMapFragment());
         transition.commit();
     }
