@@ -1,8 +1,12 @@
 package com.example.pmdmentregas;
 
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+
 import com.example.pmdmentregas.entity.Paises;
 import com.example.pmdmentregas.firebase.FirebaseAdmin;
 import com.example.pmdmentregas.firebase.FirebaseAdminListener;
+import com.example.pmdmentregas.firebase.InfoCiudadesFragmentListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,7 +22,9 @@ import java.util.ArrayList;
  * Created by tay on 11/1/18.
  */
 
-public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, InfoCiudadesFragmentListener{
+
+
     //Para implementar el onlick de los markers y realizar acciones es decir que detecte cuando hemos pinchado un pon usamos OnMarkerClickListener
     /*
     Implementamos el lsitener OnMapReadyCallBack que tiene el métood onMapReady(ir al mapsActivity para
@@ -195,8 +201,22 @@ Método implementado por el listener OnMarkerClickListener que entra cuando hemo
 
        Paises pais = (Paises)marker.getTag();//Primero casteamos el tag correspondiente al objeto país
         //Ahora ya podremos acceder a los atributos de ese país
-       System.out.println(pais.nombre);
+        //Llamamos al método de InfoCiudadesFragment que creamos para setear cada objeto pais que pasamos por parámetro
+        this.getMainActivity().getInfoCiudadesFragment().setContenido(pais);
+        FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
+        transition.show(this.getMainActivity().getInfoCiudadesFragment());
+        transition.hide(this.getMainActivity().getMapFragment());
+        transition.commit();
 
         return false;
+    }
+
+
+    @Override
+    public void pressBack() {
+        FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
+        transition.hide(this.getMainActivity().getInfoCiudadesFragment());
+        transition.show(this.getMainActivity().getMapFragment());
+        transition.commit();
     }
 }

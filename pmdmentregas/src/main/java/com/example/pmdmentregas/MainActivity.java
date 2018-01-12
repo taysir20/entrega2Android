@@ -1,5 +1,6 @@
 package com.example.pmdmentregas;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private MainActivityEvents mainActivityEvents;
     private FirebaseAdmin firebaseAdmin;
     private SupportMapFragment mapFragment; //creamos el SupportMapFragment que es más compatible que un MapFragment
+    private InfoCiudadesFragment infoCiudadesFragment; // declaramos el fragmento de la información de las ciudades
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
         dado que para trabajar con el mapa este debe de estar totalmente cargado.
                 Este método "onMapReady" de implementa mediante el listener "OnMapReadyCallback"
          */
+       this.infoCiudadesFragment = (InfoCiudadesFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragmentInfo);
+        this.getInfoCiudadesFragment().setInfoCiudadesFragmentListener(this.getMainActivityEvents());
+        FragmentTransaction transition = this.getSupportFragmentManager().beginTransaction();
+        transition.hide(this.getInfoCiudadesFragment());
+        transition.show(this.getMapFragment());
+        transition.commit();
+
 
     }
 
@@ -57,5 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setMapFragment(SupportMapFragment mapFragment) {
         this.mapFragment = mapFragment;
+    }
+
+    public InfoCiudadesFragment getInfoCiudadesFragment() {
+        return infoCiudadesFragment;
+    }
+
+    public void setInfoCiudadesFragment(InfoCiudadesFragment infoCiudadesFragment) {
+        this.infoCiudadesFragment = infoCiudadesFragment;
     }
 }

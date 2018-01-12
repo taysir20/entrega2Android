@@ -22,14 +22,18 @@ public class Paises {
     public double lon;
     public String nombre;
     public Marker marker; // creamos la variable marker para relacionar el pin con el pais para cuando queramos borrarlo
+    public String urlImg;
+    public String descripcion;
 
     public Paises() {
     }
 
-    public Paises(double lat, double lon, String nombre) {
+    public Paises(double lat, double lon, String nombre, String urlImg, String descripcion) {
         this.lat = lat;
         this.lon = lon;
         this.nombre=nombre;
+        this.urlImg=urlImg;
+        this.descripcion=descripcion;
     }
 
     public Marker getMarker() {
