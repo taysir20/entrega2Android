@@ -7,28 +7,34 @@ import android.widget.Button;
 
 
 import com.example.mylib.GPSAdmin.GPSTrackerAdmin;
+import com.example.mylib.GPSAdmin.GPSTrackerAdminListener;
+import com.example.pmdmentregas.entity.Paises;
+import com.example.pmdmentregas.entity.Perfiles;
 import com.example.pmdmentregas.firebase.FirebaseAdmin;
 import com.google.android.gms.maps.SupportMapFragment;
 
 public class MainActivity extends AppCompatActivity {
     private MainActivityEvents mainActivityEvents;
-    private FirebaseAdmin firebaseAdmin;
     private SupportMapFragment mapFragment; //creamos el SupportMapFragment que es más compatible que un MapFragment
     private InfoCiudadesFragment infoCiudadesFragment; // declaramos el fragmento de la información de las ciudades
     private Button btnTracker;
     private MostrarPosicionFragment mostrarPosicionFragment;
     private GPSTrackerAdmin gpsTrackerAdmin; // creamos la variable del GPSTrackerAdmin para poder inicializarla
+    private Button btnSignOut;
+    private GPSTrackerAdminListener gpsTrackerAdminListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.btnTracker = this.findViewById(R.id.btnTracker);
-        this.setFirebaseAdmin(new FirebaseAdmin());
         this.setMainActivityEvents(new MainActivityEvents(this));
-        this.getFirebaseAdmin().setFirebaseAdminListener(this.getMainActivityEvents());
+        DataHolder.MyDataHolder.getFirebaseAdmin().setFirebaseAdminListener(this.getMainActivityEvents());
         this.btnTracker.setOnClickListener(this.getMainActivityEvents());
         this.btnTracker.setText(R.string.btnTracker);
+        this.btnSignOut = this.findViewById(R.id.btnSignOut);
+        this.btnSignOut.setText(R.string.btnSignOut);
+        this.btnSignOut.setOnClickListener(this.getMainActivityEvents());
        /*
        Mediante el método getSpportFragemntManagr que ya conocemos pues es un método exclusivo de clases
        que extienden AppCompatActivity vamos a asignar el componente MapFragment a la variable SupportMapFragment
@@ -63,16 +69,30 @@ public class MainActivity extends AppCompatActivity {
 
     public void GPSTrackerInitialize(){
         this.setGpsTrackerAdmin(new GPSTrackerAdmin(this)); //inicializamos el GPSTrackerAdmin pasándole por parámetro el contexto que en este caso es el propio activity
+        //Seteamos el escuchador/listener del GPSTracker que será en MainActivityEvents
+        this.getGpsTrackerAdmin().setGpsTrackerAdminListener(this.getMainActivityEvents());
+        this.getGpsTrackerAdmin().getLocation(); // la primera llamada al getLocation que se produce al hacer el new del GPSTrackerAdmin
         /*
         IMPORTANTE: El contexto para inicializarlo siempre debe de ser un activity
          */
         //Comprobamos que se puede obtener la localización en el caso contrario entonces se piden los permisos correspondientes.
         if (this.getGpsTrackerAdmin().canGetLocation()){
             System.out.println("La localización por primera vez es: " + this.getGpsTrackerAdmin().getLatitude() + " " + this.getGpsTrackerAdmin().getLongitude());
+            //creamos un método para insertar en la bbdd
+            this.insertLocationFirebase(this.getGpsTrackerAdmin().getLatitude(), this.getGpsTrackerAdmin().getLongitude());
         }else{
             // Se llama a la función para pedir los permisos
             this.getGpsTrackerAdmin().showSettingsAlert();
         }
+    }
+
+
+    public void insertLocationFirebase(double lat, double lon){
+        /*
+        Cuando se llama al método de envío de los datos a subir, hay que convertir esta información en un mapa a través
+        del método que tenemos en nuestra entidad "toMap"
+        */
+        DataHolder.MyDataHolder.getFirebaseAdmin().writeNewPost("/Perfiles/",new Perfiles(lat, lon).toMap());
     }
 
     public MainActivityEvents getMainActivityEvents() {
@@ -83,13 +103,7 @@ public class MainActivity extends AppCompatActivity {
         this.mainActivityEvents = mainActivityEvents;
     }
 
-    public FirebaseAdmin getFirebaseAdmin() {
-        return firebaseAdmin;
-    }
 
-    public void setFirebaseAdmin(FirebaseAdmin firebaseAdmin) {
-        this.firebaseAdmin = firebaseAdmin;
-    }
 
     public SupportMapFragment getMapFragment() {
         return mapFragment;
@@ -129,5 +143,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setGpsTrackerAdmin(GPSTrackerAdmin gpsTrackerAdmin) {
         this.gpsTrackerAdmin = gpsTrackerAdmin;
+    }
+
+    public Button getBtnSignOut() {
+        return btnSignOut;
+    }
+
+    public void setBtnSignOut(Button btnSignOut) {
+        this.btnSignOut = btnSignOut;
+    }
+
+    public GPSTrackerAdminListener getGpsTrackerAdminListener() {
+        return gpsTrackerAdminListener;
+    }
+
+    public void setGpsTrackerAdminListener(GPSTrackerAdminListener gpsTrackerAdminListener) {
+        this.gpsTrackerAdminListener = gpsTrackerAdminListener;
     }
 }

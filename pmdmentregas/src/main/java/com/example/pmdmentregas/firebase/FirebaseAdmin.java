@@ -3,6 +3,7 @@ package com.example.pmdmentregas.firebase;
 import android.support.annotation.NonNull;
 
 
+import com.example.pmdmentregas.DataHolder;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -12,6 +13,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tay on 25/11/17.
@@ -31,12 +35,13 @@ public class FirebaseAdmin {
 
         this.onCreate();
         this.initDataBase();
-        this.signInWithEmailAndPassword("taysirasp@gmail.com", "123456");
+
 
     }
 
     public void onCreate() {
         this.setmAuth(FirebaseAuth.getInstance());
+        DataHolder.MyDataHolder.setFirebaseAdmin(this);
 
 
     }
@@ -117,7 +122,7 @@ public class FirebaseAdmin {
             // Already signed in
             // Do nothing
             System.out.println("    ESTOY LOGUEADO!!!!!!!!!");
-          //  firebaseAdminListener.loginIsOk(true);
+          firebaseAdminListener.loginIsOk(true);
         } else {
             this.getmAuth().signInWithEmailAndPassword(emailAddress, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -128,7 +133,7 @@ public class FirebaseAdmin {
 
                                 System.out.println("dentroDelOnComplete");
 
-                               // firebaseAdminListener.loginIsOk(true);
+                               firebaseAdminListener.loginIsOk(true);
                                // initDataBase();
 
                             }
@@ -141,8 +146,9 @@ public class FirebaseAdmin {
     public void logOut() {
         myChildRef.removeEventListener(valueEventListene);
         this.getmAuth().signOut();
-        firebaseAdminListener.signOutOk(true);
-        System.out.println(firebaseAdminListener);
+       // firebaseAdminListener.signOutOk(true);
+        System.out.println("cerramos sesión");
+        this.getFirebaseAdminListener().signOutOk(true);
 
 
     }
@@ -192,5 +198,20 @@ public class FirebaseAdmin {
             }
         });
     }
+
+    //Método para subir datos a firebase
+    public void writeNewPost(String branch, Map<String,Object> valores) {
+        /*
+            Creamos un hashMap cuya clave sea la rama + el uid del usuario y el valor el objeto de tipo perfil
+         */
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(branch +  this.getmAuth().getCurrentUser().getUid(), valores); //Para obtener el uid del usuario registrado se usa getUid sobre el auth del usuario actual
+        this.getMyRef().updateChildren(childUpdates); // se llama al método propio de FirebaseReference que actualiza la ram con el objeto que pasamos
+        /*
+        Si la rama no existe entonces crea una nueva y is existe la actualiza.
+         */
+    }
+
+
 
 }

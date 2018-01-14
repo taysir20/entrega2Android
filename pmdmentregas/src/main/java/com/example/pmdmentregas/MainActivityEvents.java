@@ -1,8 +1,10 @@
 package com.example.pmdmentregas;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.example.mylib.GPSAdmin.GPSTrackerAdminListener;
 import com.example.pmdmentregas.entity.Paises;
 import com.example.pmdmentregas.firebase.FirebaseAdmin;
 import com.example.pmdmentregas.firebase.FirebaseAdminListener;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  * Created by tay on 11/1/18.
  */
 
-public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, InfoCiudadesFragmentListener, View.OnClickListener, MostrarPosicionFragmentListener{
+public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, InfoCiudadesFragmentListener, View.OnClickListener, MostrarPosicionFragmentListener, GPSTrackerAdminListener{
 
 
     //Para implementar el onlick de los markers y realizar acciones es decir que detecte cuando hemos pinchado un pon usamos OnMarkerClickListener
@@ -64,6 +66,11 @@ public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCall
 
     @Override
     public void signOutOk(boolean ok) {
+        if(ok){
+            Intent intent = new Intent(this.getMainActivity(), LoginActivity.class);
+            this.getMainActivity().startActivity(intent);
+            this.getMainActivity().finish();
+        }
 
     }
 
@@ -164,7 +171,8 @@ Método que solo se ejecuta cuando el mapa está totalmente listo
         en orden. Por tanto en el método onMapReady que solo se ejecuta cuando el mapa esta listo decimos que descarga la rama
         pues ya habrá cargado dicho mapa
          */
-        this.mainActivity.getFirebaseAdmin().downloadDataAndObserveBranchChanges("Paises"); // llamo al método de descarga con la rama que quiero que observe a partir de la raíz.
+
+        DataHolder.MyDataHolder.getFirebaseAdmin().downloadDataAndObserveBranchChanges("Paises"); // llamo al método de descarga con la rama que quiero que observe a partir de la raíz.
         /*// Add a marker in Sydney and move the camera
         //Como podemos ver se crea una coordenada/posición
         LatLng sydney = new LatLng(-34, 151);
@@ -207,6 +215,7 @@ Método implementado por el listener OnMarkerClickListener que entra cuando hemo
         transition.show(this.getMainActivity().getInfoCiudadesFragment());
         transition.hide(this.getMainActivity().getMapFragment());
         this.getMainActivity().getBtnTracker().setVisibility(this.getMainActivity().getBtnTracker().GONE);
+        this.getMainActivity().getBtnSignOut().setVisibility(this.getMainActivity().getBtnTracker().GONE);
         transition.commit();
 
         return false;
@@ -219,6 +228,7 @@ Método implementado por el listener OnMarkerClickListener que entra cuando hemo
         transition.hide(this.getMainActivity().getInfoCiudadesFragment());
         transition.show(this.getMainActivity().getMapFragment());
         this.getMainActivity().getBtnTracker().setVisibility(this.getMainActivity().getBtnTracker().VISIBLE);
+        this.getMainActivity().getBtnSignOut().setVisibility(this.getMainActivity().getBtnTracker().VISIBLE);
         transition.commit();
     }
 
@@ -228,9 +238,15 @@ Método implementado por el listener OnMarkerClickListener que entra cuando hemo
             FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
             transition.hide(this.getMainActivity().getMapFragment());
             this.getMainActivity().getBtnTracker().setVisibility(view.GONE);
+            this.getMainActivity().getBtnSignOut().setVisibility(this.getMainActivity().getBtnTracker().GONE);
             transition.show(this.getMainActivity().getMostrarPosicionFragment());
             transition.commit();
 
+        }
+        else if(view.getId()==R.id.btnSignOut){
+            this.getMainActivity().getGpsTrackerAdmin().stopUsingGPS();
+            this.getMainActivity().setGpsTrackerAdmin(null);
+            DataHolder.MyDataHolder.getFirebaseAdmin().logOut();
         }
     }
 
@@ -239,7 +255,25 @@ Método implementado por el listener OnMarkerClickListener que entra cuando hemo
         FragmentTransaction transition = this.getMainActivity().getSupportFragmentManager().beginTransaction();
         transition.hide(this.getMainActivity().getMostrarPosicionFragment());
         this.getMainActivity().getBtnTracker().setVisibility(this.getMainActivity().getBtnTracker().VISIBLE);
+        this.getMainActivity().getBtnSignOut().setVisibility(this.getMainActivity().getBtnTracker().VISIBLE);
         transition.show(this.getMainActivity().getMapFragment());
         transition.commit();
+    }
+
+    //Cada vez que se reciba un true entonces se volverá a llamar a la función que iserta/actualiza del FirebaseAdmin
+    @Override
+    public void firebaseLocationUpdate(boolean ok) {
+        if(ok==true){
+            if (this.getMainActivity().getGpsTrackerAdmin().canGetLocation()){
+                System.out.println("La localización actualizada es: " + this.getMainActivity().getGpsTrackerAdmin().getLatitude() + " " + this.getMainActivity().getGpsTrackerAdmin().getLongitude());
+                //creamos un método para insertar en la bbdd
+                this.getMainActivity().insertLocationFirebase(this.getMainActivity().getGpsTrackerAdmin().getLatitude(), this.getMainActivity().getGpsTrackerAdmin().getLongitude());
+            }else{
+                // Se llama a la función para pedir los permisos
+                this.getMainActivity().getGpsTrackerAdmin().showSettingsAlert();
+            }
+        }
+
+
     }
 }

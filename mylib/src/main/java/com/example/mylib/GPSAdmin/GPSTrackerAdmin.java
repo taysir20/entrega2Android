@@ -21,6 +21,8 @@ public class GPSTrackerAdmin extends Service{
        Tenemos que extender de Service es decir de la clase padre Service que va a gestionar un servicio GPS
     */
     private GPSTrackerAdminEvents gpsTrackerAdminEvents;
+    //Escuchador del GPSTrackerAdmin
+    private GPSTrackerAdminListener gpsTrackerAdminListener;
     //Contexto de la clase que se usa para usar el locationManager
     private final Context mContext;
 
@@ -48,7 +50,7 @@ public class GPSTrackerAdmin extends Service{
     public GPSTrackerAdmin(Context mContext) {
        this.setGpsTrackerAdminEvents(new GPSTrackerAdminEvents(this));
        this.mContext=mContext;
-       this.getLocation(); // la primera llamada al getLocation que se produce al hacer el new del GPSTrackerAdmin
+
     }
 
     public Location getLocation() {
@@ -226,4 +228,11 @@ public class GPSTrackerAdmin extends Service{
         return null;
     }
 
+    public GPSTrackerAdminListener getGpsTrackerAdminListener() {
+        return gpsTrackerAdminListener;
+    }
+
+    public void setGpsTrackerAdminListener(GPSTrackerAdminListener gpsTrackerAdminListener) {
+        this.gpsTrackerAdminListener = gpsTrackerAdminListener;
+    }
 }
