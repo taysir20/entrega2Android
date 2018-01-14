@@ -50,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
          */
        this.infoCiudadesFragment = (InfoCiudadesFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragmentInfo);
+        /*
+        LLamamos a un método creado por nosotros que inicialice el GPSTracker del lib y que pregunta si
+        se puede obtener la localización o no y si no se puede entonces que llame a la función de pedir permisos.
+         */
+        this.GPSTrackerInitialize();
        this.mostrarPosicionFragment = (MostrarPosicionFragment) getSupportFragmentManager().findFragmentById(R.id.trackerFragment);
         this.getInfoCiudadesFragment().setInfoCiudadesFragmentListener(this.getMainActivityEvents());
         this.getMostrarPosicionFragment().setMostrarPosicionFragmentListener(this.getMainActivityEvents());
@@ -59,12 +64,9 @@ public class MainActivity extends AppCompatActivity {
         transition.show(this.getMapFragment());
         transition.commit();
 
-         /*
-        LLamamos a un método creado por nosotros que inicialice el GPSTracker del lib y que pregunta si
-        se puede obtener la localización o no y si no se puede entonces que llame a la función de pedir permisos.
-         */
 
-        this.GPSTrackerInitialize();
+
+
     }
 
     public void GPSTrackerInitialize(){
@@ -88,11 +90,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void insertLocationFirebase(double lat, double lon){
+        if(gpsTrackerAdmin!=null){
+        }
         /*
         Cuando se llama al método de envío de los datos a subir, hay que convertir esta información en un mapa a través
         del método que tenemos en nuestra entidad "toMap"
         */
         DataHolder.MyDataHolder.getFirebaseAdmin().writeNewPost("/Perfiles/",new Perfiles(lat, lon).toMap());
+
     }
 
     public MainActivityEvents getMainActivityEvents() {

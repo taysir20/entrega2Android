@@ -28,7 +28,7 @@ public class GPSTrackerAdminEvents implements LocationListener{
         //Vamos a ver la localización que nos devuelve la llamada desde GPSTrackerAdmin de este método:
         System.out.println("La localización es: " + location.getLatitude() + " " + location.getLongitude());
         //Desde aquí llamamos al escuchador del GPSTrackerAdmin que es el MainActivityEvents para que llama a firebase y suba la nueva localización
-       this.getGpsTrackerAdmin().getGpsTrackerAdminListener().firebaseLocationUpdate(true);
+        this.getGpsTrackerAdmin().getGpsTrackerAdminListener().firebaseLocationUpdate(true);
 
     }
     //Llamado cuando hay un cambio de estado
