@@ -207,6 +207,9 @@ public class FirebaseAdmin {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(branch +  this.getmAuth().getCurrentUser().getUid(), valores); //Para obtener el uid del usuario registrado se usa getUid sobre el auth del usuario actual
         this.getMyRef().updateChildren(childUpdates); // se llama al método propio de FirebaseReference que actualiza la ram con el objeto que pasamos
+        //Para que se vuelva a descargar la nueva posición al mapa del móvil
+        DataHolder.MyDataHolder.getFirebaseAdmin().downloadDataAndObserveBranchChanges("Perfiles/" + DataHolder.MyDataHolder.getFirebaseAdmin().getmAuth().getCurrentUser().getUid()); // llamo al método de descarga con la rama que quiero que observe a partir de la raíz.
+
         /*
         Si la rama no existe entonces crea una nueva y is existe la actualiza.
          */
