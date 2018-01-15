@@ -3,6 +3,7 @@ package com.example.pmdmentregas;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.example.mylib.AsyncTask.HttpAsyncTask;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,6 +35,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          */
 
         mapFragment.getMapAsync(this);
+
+
+
     }
 
 

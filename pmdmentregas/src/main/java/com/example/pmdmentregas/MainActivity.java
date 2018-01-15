@@ -3,10 +3,13 @@ package com.example.pmdmentregas;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.example.mylib.AsyncTask.HttpAsyncTask;
+import com.example.mylib.AsyncTask.HttpJsonAsyncTask;
 import com.example.mylib.GPSAdmin.GPSTrackerAdmin;
 import com.example.mylib.GPSAdmin.GPSTrackerAdminListener;
 import com.example.pmdmentregas.entity.Paises;
@@ -64,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
         transition.hide(this.getMostrarPosicionFragment());
         transition.show(this.getMapFragment());
         transition.commit();
+        Log.v("hola","klk");
+        System.out.println("<<<<<----------a puntiton que estoy -------------->>>>");
+        String url ="http://api.openweathermap.org/data/2.5/weather?lat="+ this.getGpsTrackerAdmin().getLatitude()+"&lon="+ this.getGpsTrackerAdmin().getLongitude()+"&appid="+DataHolder.MyDataHolder.API_KEY;
+        HttpJsonAsyncTask httpJsonAsyncTask = new HttpJsonAsyncTask();
+        httpJsonAsyncTask.execute(url);
+
 
 
     }

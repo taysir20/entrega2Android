@@ -1,6 +1,11 @@
 package com.example.mylib.AsyncTask;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,6 +41,8 @@ public class HttpJsonAsyncTask extends AsyncTask<String, Integer, String>{
 
     @Override
     protected String doInBackground(String... urls) {
+        System.out.println("La URL QUE LLEGA ES: " + urls[0]);
+        Log.v("hola","hola");
         // como podemos pasar varias urls ponemos la posición de la url que queremos pasar o un for que las recorra todas
         String result="";
         String stringUrl;
@@ -53,6 +60,7 @@ public class HttpJsonAsyncTask extends AsyncTask<String, Integer, String>{
                 connection.setRequestMethod(REQUEST_METHOD);
                 connection.setReadTimeout(READ_TIMEOUT);
                 connection.setConnectTimeout(CONNECTION_TIMEOUT);
+                System.out.print("<------------------------------JSON-----------------------------------_>");
 
                 //Nos conectamos a esta URL Object
                 connection.connect();
@@ -104,11 +112,128 @@ public class HttpJsonAsyncTask extends AsyncTask<String, Integer, String>{
 
     @Override
     protected void onPostExecute(String s) {
-        super.onPostExecute(s);
+
+
+        System.out.println("El resultado del onPostExecute----------------------------------------->>>>>>>>>> " + s);
+        Log.v("HttpJsonAsyncTask", s);
+        Log.v("HttpJsonAsyncTask", "platano");
+        try {
+            JSONObject jsonObject = new JSONObject(s);
+            JSONArray jArray = jsonObject.getJSONArray("weather");
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-----------------------------------------------El resultado del tiempo es---------------------------------------------->>>>>>>>>>>>>>>>>>>"+jArray.getJSONObject(0).get("main"));
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
 
     @Override
     protected void onCancelled() {
         super.onCancelled();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//PLATANO GUAPETON
