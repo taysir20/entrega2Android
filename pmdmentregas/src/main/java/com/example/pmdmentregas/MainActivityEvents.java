@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.example.mylib.AsyncTask.HttpJsonAsyncTask;
+import com.example.mylib.AsyncTask.HttpJsonAsyncTaskListener;
 import com.example.mylib.GPSAdmin.GPSTrackerAdminListener;
 import com.example.pmdmentregas.entity.Paises;
 import com.example.pmdmentregas.entity.Perfiles;
-import com.example.pmdmentregas.firebase.FirebaseAdmin;
 import com.example.pmdmentregas.firebase.FirebaseAdminListener;
-import com.example.pmdmentregas.firebase.InfoCiudadesFragmentListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,6 +19,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +31,7 @@ import java.util.Map;
  * Created by tay on 11/1/18.
  */
 
-public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, InfoCiudadesFragmentListener, View.OnClickListener, MostrarPosicionFragmentListener, GPSTrackerAdminListener {
+public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, InfoCiudadesFragmentListener, View.OnClickListener, MostrarPosicionFragmentListener, GPSTrackerAdminListener, HttpJsonAsyncTaskListener {
 
 
     //Para implementar el onlick de los markers y realizar acciones es decir que detecte cuando hemos pinchado un pon usamos OnMarkerClickListener
@@ -128,7 +132,11 @@ public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCall
                 hashMapPerfiles.put(dataSnapshot.getKey(), perfil);//desde el value podemos castearlo al tipo que queramos, en este caso lo casteamos al genericTypeIndicator
                 // System.out.println("snapshoot : " + hashMapPerfiles.get(DataHolder.MyDataHolder.getFirebaseAdmin().getmAuth().getCurrentUser().getUid()));
                 this.addPin("Perfiles/" + DataHolder.MyDataHolder.getFirebaseAdmin().getmAuth().getCurrentUser().getUid());
-
+                //Actualización de los datos del tiempo
+                String url ="http://api.openweathermap.org/data/2.5/weather?lat="+ this.getMainActivity().getGpsTrackerAdmin().getLatitude()+"&lon="+ this.getMainActivity().getGpsTrackerAdmin().getLongitude()+"&appid="+DataHolder.MyDataHolder.API_KEY;
+                HttpJsonAsyncTask httpJsonAsyncTask = new HttpJsonAsyncTask();
+                httpJsonAsyncTask.setHttpJsonAsyncTaskListener(this.getMainActivity().getMainActivityEvents());
+                httpJsonAsyncTask.execute(url);
             }
         }
 
@@ -357,5 +365,26 @@ public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCall
 
     public void setHashMapPerfiles(HashMap<String, Perfiles> hashMapPerfiles) {
         this.hashMapPerfiles = hashMapPerfiles;
+    }
+
+    @Override
+    public void FinalTasknotification(Object object) {
+        System.out.println("El resultado del onPostExecute----------------------------------------->>>>>>>>>> " + object);
+        try {
+            //JsonObject total que contiene todo
+            JSONObject jsonObject = new JSONObject(String.valueOf(object));
+            //JsonArray del weather que contiene a su vez objects
+            JSONArray jArrayWeather = jsonObject.getJSONArray("weather");
+            //JsonObject del Main que contiene a su vez objects
+            JSONObject jObjectMain = jsonObject.getJSONObject("main");
+            this.getMainActivity().getMostrarPosicionFragment().getTxtLocation().setText(jsonObject.get("name").toString());
+            this.getMainActivity().getMostrarPosicionFragment().getTxtTiempo().setText(jArrayWeather.getJSONObject(0).get("main").toString());
+            this.getMainActivity().getMostrarPosicionFragment().getTxtTemperatura().setText(jObjectMain.get("temp").toString());
+            this.getMainActivity().getMostrarPosicionFragment().getTxtHumedad().setText(jObjectMain.get("humidity").toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

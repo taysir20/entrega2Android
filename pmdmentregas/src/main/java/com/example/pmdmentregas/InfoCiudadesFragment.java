@@ -13,9 +13,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.pmdmentregas.entity.Paises;
-import com.example.pmdmentregas.firebase.InfoCiudadesFragmentListener;
-
-import org.w3c.dom.Text;
 
 
 /**

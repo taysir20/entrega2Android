@@ -2,8 +2,6 @@ package com.example.pmdmentregas;
 
 import android.view.View;
 
-import com.example.pmdmentregas.firebase.InfoCiudadesFragmentListener;
-
 /**
  * Created by tay on 12/1/18.
  */

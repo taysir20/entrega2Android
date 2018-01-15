@@ -25,7 +25,7 @@ public class HttpJsonAsyncTask extends AsyncTask<String, Integer, String>{
     Y por último, en el onPostExecute recibimos desde el doInBackground un string que es el resultado del json
     en string.
      */
-
+    private HttpJsonAsyncTaskListener httpJsonAsyncTaskListener; //Listener para las notificaciones del onPostExecute
     public static final String REQUEST_METHOD = "GET"; // CONSTANTE QUE INDICA EL MÉTODO DE PETICIÓN. Usaremos el GET para pasarlo por URL
     public static final int READ_TIMEOUT = 15000; // cte que indica el tiempo máximo de lectura
     public static final int CONNECTION_TIMEOUT = 15000; // cte que indica el tiempo máximo de conexión
@@ -113,21 +113,8 @@ public class HttpJsonAsyncTask extends AsyncTask<String, Integer, String>{
     @Override
     protected void onPostExecute(String s) {
 
-
-        System.out.println("El resultado del onPostExecute----------------------------------------->>>>>>>>>> " + s);
-        Log.v("HttpJsonAsyncTask", s);
-        Log.v("HttpJsonAsyncTask", "platano");
-        try {
-            JSONObject jsonObject = new JSONObject(s);
-            JSONArray jArray = jsonObject.getJSONArray("weather");
-            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-----------------------------------------------El resultado del tiempo es---------------------------------------------->>>>>>>>>>>>>>>>>>>"+jArray.getJSONObject(0).get("main"));
-
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        super.onPostExecute(s);
+        this.getHttpJsonAsyncTaskListener().FinalTasknotification(s);
 
     }
 
@@ -136,7 +123,16 @@ public class HttpJsonAsyncTask extends AsyncTask<String, Integer, String>{
     protected void onCancelled() {
         super.onCancelled();
     }
+
+    public HttpJsonAsyncTaskListener getHttpJsonAsyncTaskListener() {
+        return httpJsonAsyncTaskListener;
+    }
+
+    public void setHttpJsonAsyncTaskListener(HttpJsonAsyncTaskListener httpJsonAsyncTaskListener) {
+        this.httpJsonAsyncTaskListener = httpJsonAsyncTaskListener;
+    }
 }
+
 
 
 

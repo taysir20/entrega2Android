@@ -1,4 +1,4 @@
-package com.example.pmdmentregas.firebase;
+package com.example.pmdmentregas;
 
 /**
  * Created by tay on 12/1/18.

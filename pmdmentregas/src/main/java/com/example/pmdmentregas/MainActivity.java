@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.mylib.AsyncTask.HttpAsyncTask;
 import com.example.mylib.AsyncTask.HttpJsonAsyncTask;
+import com.example.mylib.AsyncTask.HttpJsonAsyncTaskListener;
 import com.example.mylib.GPSAdmin.GPSTrackerAdmin;
 import com.example.mylib.GPSAdmin.GPSTrackerAdminListener;
 import com.example.pmdmentregas.entity.Paises;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private GPSTrackerAdmin gpsTrackerAdmin; // creamos la variable del GPSTrackerAdmin para poder inicializarla
     private Button btnSignOut;
     private GPSTrackerAdminListener gpsTrackerAdminListener;
+    private HttpJsonAsyncTaskListener httpJsonAsyncTaskListener; //Listener para setear como escuchador de JsonAsyncTask al MainActivityEvents
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +69,16 @@ public class MainActivity extends AppCompatActivity {
         transition.hide(this.getMostrarPosicionFragment());
         transition.show(this.getMapFragment());
         transition.commit();
-        Log.v("hola","klk");
-        System.out.println("<<<<<----------a puntiton que estoy -------------->>>>");
+
+
+       /*
+       Creamos una URL que envía por parámetros mediante el método get, la latitud, la longitud y la API KEY del weather API
+       Se crea un nuevo objecto de tipo HttpJsonAsyncTask y se inicia la ejecución de la tarea asíncrona/hijo pasándole por
+       parámetro esta URLK que recibirá el doInBackground
+        */
         String url ="http://api.openweathermap.org/data/2.5/weather?lat="+ this.getGpsTrackerAdmin().getLatitude()+"&lon="+ this.getGpsTrackerAdmin().getLongitude()+"&appid="+DataHolder.MyDataHolder.API_KEY;
         HttpJsonAsyncTask httpJsonAsyncTask = new HttpJsonAsyncTask();
+        httpJsonAsyncTask.setHttpJsonAsyncTaskListener(this.getMainActivityEvents());
         httpJsonAsyncTask.execute(url);
 
 
@@ -171,5 +179,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setGpsTrackerAdminListener(GPSTrackerAdminListener gpsTrackerAdminListener) {
         this.gpsTrackerAdminListener = gpsTrackerAdminListener;
+    }
+
+    public HttpJsonAsyncTaskListener getHttpJsonAsyncTaskListener() {
+        return httpJsonAsyncTaskListener;
+    }
+
+    public void setHttpJsonAsyncTaskListener(HttpJsonAsyncTaskListener httpJsonAsyncTaskListener) {
+        this.httpJsonAsyncTaskListener = httpJsonAsyncTaskListener;
     }
 }
