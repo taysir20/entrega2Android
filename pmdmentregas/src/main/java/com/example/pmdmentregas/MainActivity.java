@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.example.mylib.GPSAdmin.GPSTrackerAdmin;
@@ -48,14 +49,14 @@ public class MainActivity extends AppCompatActivity {
         dado que para trabajar con el mapa este debe de estar totalmente cargado.
                 Este método "onMapReady" de implementa mediante el listener "OnMapReadyCallback"
          */
-       this.infoCiudadesFragment = (InfoCiudadesFragment) getSupportFragmentManager()
+        this.infoCiudadesFragment = (InfoCiudadesFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragmentInfo);
         /*
         LLamamos a un método creado por nosotros que inicialice el GPSTracker del lib y que pregunta si
         se puede obtener la localización o no y si no se puede entonces que llame a la función de pedir permisos.
          */
         this.GPSTrackerInitialize();
-       this.mostrarPosicionFragment = (MostrarPosicionFragment) getSupportFragmentManager().findFragmentById(R.id.trackerFragment);
+        this.mostrarPosicionFragment = (MostrarPosicionFragment) getSupportFragmentManager().findFragmentById(R.id.trackerFragment);
         this.getInfoCiudadesFragment().setInfoCiudadesFragmentListener(this.getMainActivityEvents());
         this.getMostrarPosicionFragment().setMostrarPosicionFragmentListener(this.getMainActivityEvents());
         FragmentTransaction transition = this.getSupportFragmentManager().beginTransaction();
@@ -65,11 +66,9 @@ public class MainActivity extends AppCompatActivity {
         transition.commit();
 
 
-
-
     }
 
-    public void GPSTrackerInitialize(){
+    public void GPSTrackerInitialize() {
         this.setGpsTrackerAdmin(new GPSTrackerAdmin(this)); //inicializamos el GPSTrackerAdmin pasándole por parámetro el contexto que en este caso es el propio activity
         //Seteamos el escuchador/listener del GPSTracker que será en MainActivityEvents
         this.getGpsTrackerAdmin().setGpsTrackerAdminListener(this.getMainActivityEvents());
@@ -78,25 +77,25 @@ public class MainActivity extends AppCompatActivity {
         IMPORTANTE: El contexto para inicializarlo siempre debe de ser un activity
          */
         //Comprobamos que se puede obtener la localización en el caso contrario entonces se piden los permisos correspondientes.
-        if (this.getGpsTrackerAdmin().canGetLocation()){
+        if (this.getGpsTrackerAdmin().canGetLocation()) {
             System.out.println("La localización por primera vez es: " + this.getGpsTrackerAdmin().getLatitude() + " " + this.getGpsTrackerAdmin().getLongitude());
             //creamos un método para insertar en la bbdd
             this.insertLocationFirebase(this.getGpsTrackerAdmin().getLatitude(), this.getGpsTrackerAdmin().getLongitude());
-        }else{
+        } else {
             // Se llama a la función para pedir los permisos
             this.getGpsTrackerAdmin().showSettingsAlert();
         }
     }
 
 
-    public void insertLocationFirebase(double lat, double lon){
-        if(gpsTrackerAdmin!=null){
+    public void insertLocationFirebase(double lat, double lon) {
+        if (gpsTrackerAdmin != null) {
         }
         /*
         Cuando se llama al método de envío de los datos a subir, hay que convertir esta información en un mapa a través
         del método que tenemos en nuestra entidad "toMap"
         */
-        DataHolder.MyDataHolder.getFirebaseAdmin().writeNewPost("/Perfiles/",new Perfiles(lat, lon).toMap());
+        DataHolder.MyDataHolder.getFirebaseAdmin().writeNewPost("/Perfiles/", new Perfiles(lat, lon).toMap());
 
     }
 
@@ -107,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
     public void setMainActivityEvents(MainActivityEvents mainActivityEvents) {
         this.mainActivityEvents = mainActivityEvents;
     }
-
 
 
     public SupportMapFragment getMapFragment() {
