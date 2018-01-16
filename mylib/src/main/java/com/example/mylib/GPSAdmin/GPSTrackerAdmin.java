@@ -42,7 +42,7 @@ public class GPSTrackerAdmin extends Service{
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // El mínimo tiempo a la hora de actualizar la localización
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 10 * 1; // 1 minute
 
     // Variable encargada de administrar todo lo relacionado con la localización
     protected LocationManager locationManager;
@@ -101,6 +101,7 @@ public class GPSTrackerAdmin extends Service{
                         location = locationManager
                                 .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (location != null) {
+                            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<-------------------LOCATION2--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>");
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
                         }
@@ -118,6 +119,7 @@ public class GPSTrackerAdmin extends Service{
                             location = locationManager
                                     .getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
+                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<-------------------LOCATION--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>");
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
                             }
