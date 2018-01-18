@@ -26,13 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         this.fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         /*
         declaramos los tres fragment en el MainActivity, instanciamos el events de este y al fab se le setea
         el listener del onlock

@@ -37,7 +37,7 @@ public class LoginFragment extends Fragment {
         this.btnRegister =(Button) fragmentLoginView.findViewById(R.id.btnRegister);
         this.btnLogin =(Button) fragmentLoginView.findViewById(R.id.btnLogin);
         this.txtEmail =(EditText) fragmentLoginView.findViewById(R.id.txtEmail);
-        this.txtPass =(EditText) fragmentLoginView.findViewById(R.id.txtPass);
+        this.txtPass =(EditText) fragmentLoginView.findViewById(R.id.txtMiPass);
 
         this.btnRegister.setText(R.string.btnRegister);
         this.btnLogin.setText(R.string.btnLogin);

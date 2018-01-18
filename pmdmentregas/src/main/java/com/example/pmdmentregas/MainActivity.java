@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         */
         String url ="http://api.openweathermap.org/data/2.5/weather?lat="+ this.getGpsTrackerAdmin().getLatitude()+"&lon="+ this.getGpsTrackerAdmin().getLongitude()+"&appid="+DataHolder.MyDataHolder.API_KEY;
         HttpJsonAsyncTask httpJsonAsyncTask = new HttpJsonAsyncTask();
+        httpJsonAsyncTask.REQUEST_METHOD="GET";
         httpJsonAsyncTask.setHttpJsonAsyncTaskListener(this.getMainActivityEvents());
         httpJsonAsyncTask.execute(url);
 
