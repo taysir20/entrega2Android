@@ -1,5 +1,5 @@
 //include ':app', ':miapp2'
-include ':mylib',  ':entrega2', ':examenAndroid', ':dintentregas', ':pmdmentregas', ':dintentregas2', ':pmdmentregas2'
+include ':mylib',  ':entrega2', ':examenAndroid', ':dintentregas', ':pmdmentregas', ':dintentregas2', ':pmdmentregas2', ':pmdmentregas3'
 //include  ':mylib', ':entrega2'
 //include  ':mylib', ':examenAndroid'
 //include ':pmdmentregas'

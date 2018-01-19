@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">pmdmentregas3</string>
+    <!--
+    String para el app id que cogeremos de facebook developers
+    -->
+    <string name="facebook_app_id">194058234670030</string>
+    <!--
+    String que contiene el hash para el logueo de facebook
+    -->
+    <string name="fb_login_protocol_scheme">fb194058234670030</string>
+
+</resources>
