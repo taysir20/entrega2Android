@@ -39,5 +39,11 @@ dependencies {
     compile 'com.google.firebase:firebase-database:11.8.0'
     //Implementamos el SDK de Facebook en el módulo
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //Implementamos el SDK de Twitter para su uso
+    // Include all the Twitter APIs
+    compile 'com.twitter.sdk.android:twitter:3.1.1'
+    // (Optional) Monetize using mopub
+    compile 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
+import com.twitter.sdk.android.core.Twitter;
 
 import org.json.JSONObject;
 
@@ -52,6 +53,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Inicializamos el SDK de Twitter llamándolo psándole como contexto la propio Activity en la que nos encontramos
+        /*
+        Tenemos que realizar el initialize antes que el setContentView pues si no intenta inicializar los
+        componentes visuales es decir los botones antes de cargar twitter y entonces el botón no funciona
+         */
+        Twitter.initialize(this);
+        /*
+        Podemos setear de manera manual la configuración de twitter pero el método initialize lo hará por nosotros
+        public void onCreate() {
+            TwitterConfig config = new TwitterConfig.Builder(this)
+                    .logger(new DefaultLogger(Log.DEBUG))
+                    .twitterAuthConfig(new TwitterAuthConfig("CONSUMER_KEY", "CONSUMER_SECRET"))
+                    .debug(true)
+                    .build();
+            Twitter.initialize(config);
+        }
+        */
         setContentView(R.layout.activity_main);
         this.setMainActivityEvents(new MainActivityEvents(this));
         firebaseAdmin = new FirebaseAdmin();
@@ -63,8 +81,9 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setReadPermissions(Arrays.asList
                 ("public_profile","user_friends", "email" , "user_photos","  user_birthday","read_custom_friendlists" ));
 
+
         /*
-        Si queremos meter el botón dentro de un fragment se usará
+        Si queremos meter el botón de facebook dentro de un fragment se usará
          loginButton.setFragment(this);
          */
 

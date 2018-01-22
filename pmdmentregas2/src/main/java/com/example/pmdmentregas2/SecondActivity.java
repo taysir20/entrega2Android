@@ -27,7 +27,7 @@ import java.io.File;
 
 public class SecondActivity extends AppCompatActivity {
     private SecondActivityEvents secondActivityEvents;
-    private  DrawerLayout drawer;
+    private DrawerLayout drawer;
     private TextView txtID;
     private TextView txtNombre;
     private TextView txtApellido;
@@ -41,7 +41,6 @@ public class SecondActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +51,7 @@ public class SecondActivity extends AppCompatActivity {
         //el botón flotante
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         //Pintado del menú izquierdo
-         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         /*
         El toggle sirve para realziar la transición del navigation bar de izquierda a derecha y se definen dos estados,
         si está abierto o cerrado
@@ -63,10 +62,10 @@ public class SecondActivity extends AppCompatActivity {
         toggle.syncState();
         //Vista de navegación encargada de la navegación de los elementos del menú de la izquierda (es el menú de la izquierda)
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-       //New del secondActivity
+        //New del secondActivity
         this.setSecondActivityEvents(new SecondActivityEvents(this));
         //Seteamos al fab y al navigator el listener que será el second activity
-        fab.setOnClickListener(this.getSecondActivityEvents()) ;
+        fab.setOnClickListener(this.getSecondActivityEvents());
         navigationView.setNavigationItemSelectedListener(this.getSecondActivityEvents());
         this.txtID = (TextView) this.findViewById(R.id.txtID);
         this.txtNombre = (TextView) this.findViewById(R.id.txtNombre);
@@ -74,7 +73,7 @@ public class SecondActivity extends AppCompatActivity {
         this.txtEdad = (TextView) this.findViewById(R.id.txtEdad);
         this.txtCiudad = (TextView) this.findViewById(R.id.txtCiudad);
         this.txtEmail = (TextView) this.findViewById(R.id.txtEmail);
-        this.navigationView=(NavigationView)  this.findViewById(R.id.nav_view);
+        this.navigationView = (NavigationView) this.findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         this.imgPerfil = (ImageView) headerView.findViewById(R.id.imgPerfil);
         this.txtNombrePerfil = (TextView) headerView.findViewById(R.id.txtPerfil_Nombre);
@@ -83,30 +82,31 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    public void setearDatos(){
-       JSONObject jsonObject = DataHolder.MyDataHolder.jsonObject;
-       try{
-           this.txtID.setText(jsonObject.getJSONObject("alumno").get("id").toString());
-           this.txtNombre.setText(jsonObject.getJSONObject("alumno").get("nombre").toString());
-           this.txtApellido.setText(jsonObject.getJSONObject("alumno").get("apellido").toString());
-           this.txtEdad.setText(jsonObject.getJSONObject("alumno").get("edad").toString());
-           this.txtCiudad.setText(jsonObject.getJSONObject("alumno").get("ciudad").toString());
-           this.txtEmail.setText(jsonObject.getJSONObject("alumno").get("mail").toString());
-          this.txtNombrePerfil.setText(jsonObject.getJSONObject("alumno").get("nombre").toString());
-           this.txtEmailPerfil.setText(jsonObject.getJSONObject("alumno").get("mail").toString());
+    public void setearDatos() {
+        JSONObject jsonObject = DataHolder.MyDataHolder.jsonObject;
+        try {
+            this.txtID.setText(jsonObject.getJSONObject("alumno").get("id").toString());
+            this.txtNombre.setText(jsonObject.getJSONObject("alumno").get("nombre").toString());
+            this.txtApellido.setText(jsonObject.getJSONObject("alumno").get("apellido").toString());
+            this.txtEdad.setText(jsonObject.getJSONObject("alumno").get("edad").toString());
+            this.txtCiudad.setText(jsonObject.getJSONObject("alumno").get("ciudad").toString());
+            this.txtEmail.setText(jsonObject.getJSONObject("alumno").get("mail").toString());
+            this.txtNombrePerfil.setText(jsonObject.getJSONObject("alumno").get("nombre").toString());
+            this.txtEmailPerfil.setText(jsonObject.getJSONObject("alumno").get("mail").toString());
 
-          Glide.with(this.getBaseContext()).load(jsonObject.getJSONObject("alumno").get("img").toString()).into(this.imgPerfil);
-         // Glide.with(this.getBaseContext()).load("https://iosscripts.com/iosslider/_img/h-slider-5.jpg").into(this.imgFondoPerfil);
+            Glide.with(this.getBaseContext()).load(jsonObject.getJSONObject("alumno").get("img").toString()).into(this.imgPerfil);
+            // Glide.with(this.getBaseContext()).load("https://iosscripts.com/iosslider/_img/h-slider-5.jpg").into(this.imgFondoPerfil);
 
-       }catch (JSONException e){
+        } catch (JSONException e) {
 
-       }
+        }
 
     }
+
     //Se llama cuando se presiona el botón de android de atrás y así el menú de la izquierda para poder ocultarlo si está abierto
     @Override
     public void onBackPressed() {
-         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         /*
         Si está abierto el menú, decimos que se oculte
          */
@@ -119,11 +119,12 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       //Infla las opciones del menú del menú settins
+        //Infla las opciones del menú del menú settins
         //Le pasamos el xml de los elementos es decir opciones que queremos que se pinten/inflen dentro de settins
         getMenuInflater().inflate(R.menu.second, menu);
         return true;
     }
+
     //Detecta si se ha presionado el menú de settins
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -139,8 +140,6 @@ public class SecondActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     public SecondActivityEvents getSecondActivityEvents() {
