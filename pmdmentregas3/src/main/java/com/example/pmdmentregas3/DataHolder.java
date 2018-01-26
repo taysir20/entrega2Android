@@ -14,6 +14,7 @@ public class DataHolder {
 
     public static class MyDataHolder {
         public static JSONObject jsonObject;
+        public static  JSONObject jsonObjectTwitter;
         public static FirebaseAdmin firebaseAdmin;
 
         public static JSONObject getJsonObject() {
@@ -30,6 +31,14 @@ public class DataHolder {
 
         public static void setFirebaseAdmin(FirebaseAdmin firebaseAdmin) {
             MyDataHolder.firebaseAdmin = firebaseAdmin;
+        }
+
+        public static JSONObject getJsonObjectTwitter() {
+            return jsonObjectTwitter;
+        }
+
+        public static void setJsonObjectTwitter(JSONObject jsonObjectTwitter) {
+            MyDataHolder.jsonObjectTwitter = jsonObjectTwitter;
         }
     }
 

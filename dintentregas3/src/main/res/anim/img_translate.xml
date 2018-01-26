@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:fillAfter="true">
+
+    <!--
+    Para establecer animaciones que mueven el elemento entonces vamos a usar la etiqueta translate.
+    Haremos uso de los atributos vistos para las anteriores animaciones y usaremos esta vez el atributo
+    delta from/to para x e y para especificar cuanto se moverá DE MANERA VISUAL NUESTRO COMPONENTE.
+    HAY QUE TENER EN CUENTA QUE EL COMPONENTE SIGUE EN SU POSICIÓN INICAL EN REALIDAD SI NO LE SETEAMOS
+    LA NUEVA POSICIÓN
+    -->
+    <translate
+        android:fromXDelta="0%"
+        android:toXDelta="-500%"
+        android:duration="1000"
+        android:fillAfter="true">
+    </translate>
+
+    <translate
+        android:fromXDelta="0%"
+        android:toXDelta="500%"
+        android:startOffset="1000"
+        android:duration="1000"
+        android:fillAfter="true"
+       >
+    </translate>
+
+    <translate
+        android:fromXDelta="0%"
+        android:toXDelta="500%"
+        android:startOffset="2000"
+        android:duration="1000"
+        android:fillAfter="true">
+    </translate>
+
+    <translate
+        android:fromXDelta="0%"
+        android:toXDelta="-500%"
+        android:startOffset="3000"
+        android:duration="1000">
+    </translate>
+
+</set>

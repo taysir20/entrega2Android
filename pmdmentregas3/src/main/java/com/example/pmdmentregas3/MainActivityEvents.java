@@ -25,4 +25,9 @@ public class MainActivityEvents {
         mainActivity.startActivity(intent);
         mainActivity.finish();
     }
+    public void iniciarAppThirdActivity(){
+        Intent intent = new Intent(mainActivity, ThirdActivity.class);
+        mainActivity.startActivity(intent);
+        mainActivity.finish();
+    }
 }

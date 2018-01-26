@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/TrabajosAndroid.iml" filepath="$PROJECT_DIR$/TrabajosAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/dintentregas/dintentregas.iml" filepath="$PROJECT_DIR$/dintentregas/dintentregas.iml" />
       <module fileurl="file://$PROJECT_DIR$/dintentregas2/dintentregas2.iml" filepath="$PROJECT_DIR$/dintentregas2/dintentregas2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dintentregas3/dintentregas3.iml" filepath="$PROJECT_DIR$/dintentregas3/dintentregas3.iml" />
       <module fileurl="file://$PROJECT_DIR$/entrega2/entrega2.iml" filepath="$PROJECT_DIR$/entrega2/entrega2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/entrega2Android.iml" filepath="$PROJECT_DIR$/.idea/entrega2Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/examenAndroid/examenAndroid.iml" filepath="$PROJECT_DIR$/examenAndroid/examenAndroid.iml" />
@@ -13,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/pmdmentregas/pmdmentregas.iml" filepath="$PROJECT_DIR$/pmdmentregas/pmdmentregas.iml" />
       <module fileurl="file://$PROJECT_DIR$/pmdmentregas2/pmdmentregas2.iml" filepath="$PROJECT_DIR$/pmdmentregas2/pmdmentregas2.iml" />
       <module fileurl="file://$PROJECT_DIR$/pmdmentregas3/pmdmentregas3.iml" filepath="$PROJECT_DIR$/pmdmentregas3/pmdmentregas3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pmdmentregas4/pmdmentregas4.iml" filepath="$PROJECT_DIR$/pmdmentregas4/pmdmentregas4.iml" />
     </modules>
   </component>
 </project>

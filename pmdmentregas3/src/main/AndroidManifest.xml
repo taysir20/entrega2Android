@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pmdmentregas3">
 
-    <!--     Añadimos permisos de internet como otras veces en otros módulos dado que facebook requiere de permisos de internet. -->
+    <!-- Añadimos permisos de internet como otras veces en otros módulos dado que facebook requiere de permisos de internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -26,17 +26,18 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <!--         Para descargar imagenes y vídeos de facebook añadimos la siguiente etiqueta provider -->
+        <!-- Para descargar imagenes y vídeos de facebook añadimos la siguiente etiqueta provider -->
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider194058234670030"
             android:exported="true" />
-        <!--         Facebook hace uso de su propio activity para el uso de este en la aplicación -->
+        <!-- Facebook hace uso de su propio activity para el uso de este en la aplicación -->
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".ThirdActivity"></activity>
     </application>
 
 </manifest>

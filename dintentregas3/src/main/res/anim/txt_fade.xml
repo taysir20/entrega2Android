@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Las animaciones deberan crearse dentro de una carpeta llamada 'anim' dentro de la carpeta res. Para ello hacemos un new
+android resource directory y después dentro de ella hacemos un new animation resource file.
+Usamos set de animaciones para defenir un comportamiento visual a un componente y cuyos efectos se ejecutan
+de manera paralela dentro de este set.
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:fillAfter="true">
+    <!--
+    Para poder ocultar un componente usamos la etiqueta alpha que juega con los valores de transparencia de dicho
+    componente.
+    Como parámetros podemos poner la duración, la solidez inicial y la final, en nuestro caso que se vea totalmente y que durante
+    esos dos segundos se haga transparente totalmente y le decimos con la propiedad interpolator, como queremos que se ejecute la
+    animación, en este caso que se lineal (podría sen ondulada o como quieras)
+    NOTA IMPORTANTE:
+    TODAS LAS ANIMACIONES SON UNA REPRESENTACIÓN EN BITS DE LA PARTE VISUAL, PERO NO MODIFICAN LA PROPIEDAD DE ESE ELEMENTO EN LA APLICACIÓN
+    ES DECIR QUE SI SE HACE UNA TRANSLACIÓN DE UN BOTÓN A OTRO PUNTO DE TU ACTIVITY SOLAMENTE SE ESTARÁ HACINEDO A NIVEL VISUAL, PUES EL
+    BOTÓN EN REALIDAD SEGUIRÁ EN LA POSICIÓN DONDE ESTABA ESTABLECIDA.
+    PARA PODER CAMBIAR LA NUEVA POSICIÓN TENEMOS QUE SETEARLA DESDE CÓDIGO JAVA.
+    ADEMÁS, SI QUEREMOS EJECUTAR ANIMACIONES DE FORMA SECUENCIAL TENEMOS QUE HACER USO DE LAS PROIEDADES STARTOFFSET, FILLAFTER Y FILLBEFORE
+    Por ejemplo, al acabar una animación si hemos puesto fillAfter a true entonces el componente viasualmente no volverá a su posición inical
+    y concatenará la siguiente animación desde donde se encuentra al finalizar la primera animación, por lo tanto se dice que está persistiendo
+    la posición de la animación una vez que acaba esta
+    -->
+    <alpha
+        android:duration="2500"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:repeatCount="1"
+        android:repeatMode="reverse">
+    </alpha>
+    <!--
+    Si queremos ejecutar animaciones dentro del set que no sean paralelas es decir secuenciales, entonces podemos establecer
+    al resto de animacion la propiedad startOffset
+    -->
+
+
+
+
+</set>

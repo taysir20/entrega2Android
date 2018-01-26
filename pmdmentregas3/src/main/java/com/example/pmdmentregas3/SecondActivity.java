@@ -17,6 +17,7 @@ public class SecondActivity extends AppCompatActivity {
     private  SecondActivityEvents secondActivityEvents;
     private TextView txtNombrePerfil;
     private TextView txtCumple;
+    private TextView txtEmail;
     private ImageView imgPerfilFacebook;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,18 @@ public class SecondActivity extends AppCompatActivity {
         this.txtNombrePerfil = this.findViewById(R.id.txtNombreFacebook);
         this.imgPerfilFacebook = this.findViewById(R.id.imgPerfilFacebook);
         this.txtCumple = this.findViewById(R.id.txtCumple);
+        this.txtEmail = this.findViewById(R.id.txtEmail);
+        this.setData();
+
+    }
+
+    private void setData(){
+
         try {
             JSONObject data = DataHolder.MyDataHolder.jsonObject;
             this.txtNombrePerfil.setText(data.get("name").toString());
             this.txtCumple.setText(data.get("birthday").toString());
+            this.txtEmail.setText(data.get("email").toString());
             if (data.has("picture")) {
                 System.out.println("La url de la img de facebook es: " + data.getJSONObject("picture").getJSONObject("data").get("url").toString());
                /* Picasso.with(this)
@@ -45,6 +54,7 @@ public class SecondActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public SecondActivityEvents getSecondActivityEvents() {
