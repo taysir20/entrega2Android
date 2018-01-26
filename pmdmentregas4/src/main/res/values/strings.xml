@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">pmdmentregas4</string>
+    <!--
+    Este es el id que usamos para definir el canal de configuración que queramos para poder ser
+    usado por ejemplo en el Notification.InboxStyle o el meta messaging.default_notification_channel_id
+    -->
+    <string name="default_notification_channel_id">appPruebaPush</string>
 </resources>

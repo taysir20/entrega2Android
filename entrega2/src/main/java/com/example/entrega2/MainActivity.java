@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
         transaction.show(this.getLoginFragment());
         transaction.commit(); // comiteamos
 
+
         /*
         android.support.v4.app.FragmentTransaction transition = this.getSupportFragmentManager().beginTransaction();
         transition.hide(this.getRegisterFragment());

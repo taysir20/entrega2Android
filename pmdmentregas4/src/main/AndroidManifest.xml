@@ -16,6 +16,50 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SecondActivity"></activity>
+        <!-- Etiqueta service declara un activity especial que se encarga d elos servicios en segundo plano
+         de la aplicación. Lo usaremos para gestionar los push notification. Si nuestra app está cerrada este service
+         seguirá teniendo un canal de comunicación constante entre firebase y nuestra app. Su funcionamiento es
+         similar al de un socket en un bucle while que siempre está escuchando.
+         Por último destacar los dos tipos de serbice que crearemos correspondientes a las clases que vamos a crear.
+         "MessagingService sirve para Esto es obligatorio si deseas tener administrar los mensajes además de
+         recibir notificaciones en apps en segundo plano. Para recibir notificaciones en apps en primer plano,
+         recibir la carga de datos y enviar mensajes ascendentes, etc., debes extender este servicio.
+         El "InstanceIDService" se encarga para administrar la creación, la rotación y la actualización de los
+         tokens de registro. Esto es obligatorio para enviar a dispositivos específicos o para crear grupos de dipositos.
+         Es decir para pedir el token propio del dispositivo desde el cuál te conectas que es como una id y asociarla
+         al usuario de firebase. Comprueba si ya está asociado y si no lo asocia-->
+        <service
+            android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+      <!--
+      Podemos usar los siguientes meta-data para poder asignar un icono y un background personalizado de la notificación que
+      recibimos
+      -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/common_google_signin_btn_text_dark_normal" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <!--Podemos expecificar también el canal en el que queremos enviar las push es decir filtrar por este canal.
+        Por ejemplo personas del canal 25 se les envia solamente el push a ellos.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id"/>
     </application>
 
 </manifest>
