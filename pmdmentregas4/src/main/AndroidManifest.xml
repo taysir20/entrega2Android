@@ -30,13 +30,13 @@
          Es decir para pedir el token propio del dispositivo desde el cuál te conectas que es como una id y asociarla
          al usuario de firebase. Comprueba si ya está asociado y si no lo asocia-->
         <service
-            android:name=".MyFirebaseMessagingService">
+            android:name=".firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
         <service
-            android:name=".MyFirebaseInstanceIDService">
+            android:name=".firebase.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

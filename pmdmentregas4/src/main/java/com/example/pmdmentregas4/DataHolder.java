@@ -1,6 +1,9 @@
 package com.example.pmdmentregas4;
 
-import com.example.mylib.fragment.ListFragment;
+import android.app.NotificationManager;
+
+
+import com.example.pmdmentregas4.SQLite.DatabaseHandler;
 import com.example.pmdmentregas4.firebase.FirebaseAdmin;
 
 /**
@@ -11,7 +14,10 @@ public class DataHolder {
 
     public static class MyDataHolder {
         public static FirebaseAdmin firebaseAdmin;
-        public static ListFragment listFragment;
+        public static DatabaseHandler databaseHandler;
+
+
+
 
         public static FirebaseAdmin getFirebaseAdmin() {
             return firebaseAdmin;
@@ -21,6 +27,13 @@ public class DataHolder {
             MyDataHolder.firebaseAdmin = firebaseAdmin;
         }
 
+        public static DatabaseHandler getDatabaseHandler() {
+            return databaseHandler;
+        }
+
+        public static void setDatabaseHandler(DatabaseHandler databaseHandler) {
+            MyDataHolder.databaseHandler = databaseHandler;
+        }
     }
 
 

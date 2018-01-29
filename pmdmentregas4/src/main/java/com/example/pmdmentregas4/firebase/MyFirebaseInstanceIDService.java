@@ -1,4 +1,4 @@
-package com.example.pmdmentregas4;
+package com.example.pmdmentregas4.firebase;
 
 import android.util.Log;
 
@@ -9,7 +9,6 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 /**
  * Created by tay on 26/1/18.
  */
-
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService{
     /*
     Clase que hereda de InstanceIdService y que servirá para administrar cuando nos damos de alto en firebase para guardar el token
@@ -26,10 +25,14 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService{
      * is initially generated so this is where you would retrieve the token.
      */
     // [START refresh_token]
+
+
+    //Genera el token es decir id que se registra en el firebase. Se ejecutará siempre que iniciemos la app o se refresque el token
     @Override
     public void onTokenRefresh() {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        System.out.println("el token es: " + FirebaseInstanceId.getInstance().getToken());
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
         // If you want to send messages to this application instance or
@@ -52,8 +55,12 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService{
     Con este método podemos guardar el token en la propia base de datos de ese usuario para tener visible el token desde allí,
     dado que cunado se proporciona el token con el método onRTokenRefressh este lo trata de forma interna firebase sin poder verlo.
     Por eso lo podemos almacenar.
+
+    Si guardamos el token en la bbdd referida a un usuario entonces desde las notificaciones de firebase podemos filtrar por ese token
+    por ejemplo si queremos y solo enviarselo a ese dispositivo
      */
     private void sendRegistrationToServer(String token) {
+        System.out.println("el token es: " + token);
         // TODO: Implement this method to send token to your app server.
     }
 }

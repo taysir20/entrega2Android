@@ -3,6 +3,10 @@ package com.example.pmdmentregas4;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,17 +17,23 @@ import android.os.Bundle;
 
 import com.example.mylib.fragment.LoginFragment;
 import com.example.mylib.fragment.RegisterFragment;
+import com.example.pmdmentregas4.SQLite.DatabaseHandler;
 import com.example.pmdmentregas4.firebase.FirebaseAdmin;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.firebase.messaging.FirebaseMessaging;
+
 
 public class MainActivity extends AppCompatActivity {
     private LoginFragment loginFragment;
     private RegisterFragment registerFragment;
     private MainActivityEvents mainActivityEvents;
     private FirebaseAdmin firebaseAdmin;
+    private DatabaseHandler databaseHandler;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.show();
 
         }
+        //Creamos la instacia para el gestor de la base de datos sql lite y le pasamos como contexto el propio main activity
+
 
 
 
@@ -107,7 +119,23 @@ public class MainActivity extends AppCompatActivity {
         this.firebaseAdmin = firebaseAdmin;
     }
 
+    public DatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
+    }
 
+    public void setDatabaseHandler(DatabaseHandler databaseHandler) {
+        this.databaseHandler = databaseHandler;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DatabaseHandler databaseHandler= new DatabaseHandler(this);
+        databaseHandler.deleteAllMessage();
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
+
+    }
 }
 
 
