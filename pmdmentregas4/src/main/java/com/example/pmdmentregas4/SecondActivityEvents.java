@@ -35,6 +35,7 @@ public class SecondActivityEvents implements View.OnClickListener, FirebaseAdmin
     @Override
     public void loginIsOk(boolean ok) {
 
+
     }
 
     @Override
@@ -55,6 +56,8 @@ public class SecondActivityEvents implements View.OnClickListener, FirebaseAdmin
 
     @Override
     public void downloadBranch(String branch, DataSnapshot dataSnapshot) {
+
+
 
     }
 }

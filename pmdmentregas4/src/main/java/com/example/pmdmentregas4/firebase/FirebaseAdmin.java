@@ -24,6 +24,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -199,6 +200,15 @@ public class FirebaseAdmin {
 
             }
         });
+    }
+
+
+    public void insertToken(){
+        this.myChildRef= this.getMyRef().child("Perfiles").child(this.getmAuth().getUid()).child("Token");
+
+        this.myChildRef.setValue(DataHolder.MyDataHolder.getToken());
+
+
     }
 
 

@@ -21,6 +21,7 @@ import com.example.pmdmentregas4.SQLite.DatabaseHandler;
 import com.example.pmdmentregas4.firebase.FirebaseAdmin;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.crash.FirebaseCrash;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,33 +54,46 @@ public class MainActivity extends AppCompatActivity {
 //Comprobación de los servicios de google si no los tenemos los pedirá que instalemos
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
         int resultCode = api.isGooglePlayServicesAvailable(getApplicationContext());
+
+        /*
+        EJEMPLO DE EXCEPCIÓN AÑADIDA A MANO. SIEMPRE SE VA A EJECUTAR Y ENVIAR A FIREBASE
+         */
+        FirebaseCrash.report(new Exception("Mi primera excepción a Firebase"));
+
+
+
         if (resultCode == ConnectionResult.SUCCESS) {
             System.out.println("Hay servicios google play");
 
         }else{
+            try{
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Atención");
+                alertDialog.setMessage("Para usar está aplicación debe de instalar los servicios de Google.");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                                try {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                }
+                                catch (android.content.ActivityNotFoundException anfe) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                }
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }catch(ExceptionInInitializerError e){
+                //Excepción si no se ejecuta el alertDialog cuando no hay Google Play instalada
+                FirebaseCrash.report(e);
+            }
 
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("Atención");
-            alertDialog.setMessage("Para usar está aplicación debe de instalar los servicios de Google.");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                            try {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                            }
-                            catch (android.content.ActivityNotFoundException anfe) {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                            }
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
 
         }
-        //Creamos la instacia para el gestor de la base de datos sql lite y le pasamos como contexto el propio main activity
 
-
+        //Enviamos también un log para debuggear nuestra app dede firebase. Si todo el oncreate se ha ejecutado correctamente se enviará el log
+        FirebaseCrash.log("ONCREATE EJECUTADO CORRECTAMENTE");
 
 
 

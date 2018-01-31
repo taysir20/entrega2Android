@@ -18,6 +18,7 @@ android {
 
     buildTypes {
         release {
+            //para ofuscar la aplicación y hacerla segura se pone a true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -43,5 +44,7 @@ dependencies {
     Recordar que gracias a Firebase podemos usar este sistema dado que ya lo tiene implementado.
      */
     compile 'com.google.firebase:firebase-messaging:11.8.0'
+    //Librería Firebase para incorporar el crash reporting
+    implementation 'com.google.firebase:firebase-crash:11.8.0'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -2,6 +2,7 @@ package com.example.pmdmentregas4.firebase;
 
 import android.util.Log;
 
+import com.example.pmdmentregas4.DataHolder;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -60,7 +61,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService{
     por ejemplo si queremos y solo enviarselo a ese dispositivo
      */
     private void sendRegistrationToServer(String token) {
+
         System.out.println("el token es: " + token);
-        // TODO: Implement this method to send token to your app server.
+        DataHolder.MyDataHolder.token=token;
     }
 }

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 
 import com.example.pmdmentregas.DataHolder;
+import com.example.pmdmentregas.entity.Perfiles;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -201,6 +202,7 @@ public class FirebaseAdmin {
 
     //Método para subir datos a firebase
     public void writeNewPost(String branch, Map<String,Object> valores) {
+
         /*
             Creamos un hashMap cuya clave sea la rama + el uid del usuario y el valor el objeto de tipo perfil
          */

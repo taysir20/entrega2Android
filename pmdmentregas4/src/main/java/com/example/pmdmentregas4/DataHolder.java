@@ -15,6 +15,7 @@ public class DataHolder {
     public static class MyDataHolder {
         public static FirebaseAdmin firebaseAdmin;
         public static DatabaseHandler databaseHandler;
+        public static String token;
 
 
 
@@ -33,6 +34,14 @@ public class DataHolder {
 
         public static void setDatabaseHandler(DatabaseHandler databaseHandler) {
             MyDataHolder.databaseHandler = databaseHandler;
+        }
+
+        public static String getToken() {
+            return token;
+        }
+
+        public static void setToken(String token) {
+            MyDataHolder.token = token;
         }
     }
 

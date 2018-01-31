@@ -17,6 +17,9 @@ import com.example.mylib.fragment.RegisterFragmentListener;
 import com.example.pmdmentregas4.firebase.FirebaseAdminListener;
 import com.google.firebase.database.DataSnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by tay on 26/1/18.
  */
@@ -65,9 +68,11 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
 
         System.out.println("llega: " + ok);
         if(ok){
+            this.mainActivity.getFirebaseAdmin().insertToken();
             Intent intent = new Intent(mainActivity, SecondActivity.class);
             mainActivity.startActivity(intent);
             mainActivity.finish();
+
         }
 
     }
@@ -93,6 +98,8 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
     public void downloadBranch(String branch, DataSnapshot dataSnapshot) {
 
     }
+
+
 
 
 }
