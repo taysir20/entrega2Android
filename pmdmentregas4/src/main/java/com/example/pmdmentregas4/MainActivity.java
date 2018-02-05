@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Enviamos también un log para debuggear nuestra app dede firebase. Si todo el oncreate se ha ejecutado correctamente se enviará el log
-        FirebaseCrash.log("ONCREATE EJECUTADO CORRECTAMENTE");
+        FirebaseCrash.log("ONCREATE MAIN ACTIVITY EJECUTADO CORRECTAMENTE");
 
 
 

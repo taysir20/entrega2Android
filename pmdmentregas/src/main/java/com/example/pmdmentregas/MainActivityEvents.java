@@ -135,6 +135,7 @@ public class MainActivityEvents implements FirebaseAdminListener, OnMapReadyCall
                 //Actualización de los datos del tiempo
                 String url ="http://api.openweathermap.org/data/2.5/weather?lat="+ this.getMainActivity().getGpsTrackerAdmin().getLatitude()+"&lon="+ this.getMainActivity().getGpsTrackerAdmin().getLongitude()+"&appid="+DataHolder.MyDataHolder.API_KEY;
                 HttpJsonAsyncTask httpJsonAsyncTask = new HttpJsonAsyncTask();
+                HttpJsonAsyncTask.REQUEST_METHOD="GET";
                 httpJsonAsyncTask.setHttpJsonAsyncTaskListener(this.getMainActivity().getMainActivityEvents());
                 httpJsonAsyncTask.execute(url);
             }
