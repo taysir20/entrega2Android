@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "695657735087",
+    "firebase_url": "https://examenapuntesandroid.firebaseio.com",
+    "project_id": "examenapuntesandroid",
+    "storage_bucket": "examenapuntesandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695657735087:android:4b4507e30ce3cb79",
+        "android_client_info": {
+          "package_name": "com.example.tay.examenapuntes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695657735087-goulnlr8s09hq05fgoin6k277ga4gttk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHb9T9Clno468vr4OMenpZsD8A16Yrq7s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

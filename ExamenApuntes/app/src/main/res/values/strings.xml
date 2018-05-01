@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ExamenApuntes</string>
+    <string name="facebook_app_id">2011916702414553</string><!-- string que contiene el id de la aplicación de facebook-->
+    <string name="fb_login_protocol_scheme">fb2011916702414553</string>  <!--añadimos el protocol scheme-->
+    <string name="CredentialTokenGoogle">258465787192-akrdlhmdjo2sqjehv3h1il359og2kqio.apps.googleusercontent.com</string>
+    <string name="title_activity_second">SecondActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_my_map">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

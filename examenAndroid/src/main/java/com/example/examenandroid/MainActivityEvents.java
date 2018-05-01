@@ -8,6 +8,8 @@ import com.example.mylib.fragment.LoginFragmentListener;
 import com.example.mylib.fragment.RegisterFragmentListener;
 import com.google.firebase.database.DataSnapshot;
 
+
+
 /**
  * Created by tay on 18/12/17.
  */
@@ -28,7 +30,6 @@ public class MainActivityEvents implements LoginFragmentListener, RegisterFragme
     public MainActivityEvents(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
-
     public MainActivity getMainActivity() {
         return mainActivity;
     }

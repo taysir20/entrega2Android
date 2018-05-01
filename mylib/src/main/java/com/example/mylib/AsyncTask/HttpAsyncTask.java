@@ -24,7 +24,7 @@ public class HttpAsyncTask extends AsyncTask<String,Integer,String[]>{
     método es un método de una clase abstracta y nos obliga.
     Cuando extendemos de AyncTask podemos especificar los parámetros que llevaron los métodos de los que
     extenderemos. Son 3, el primero es el parámetro de entrada del método de doInBackground, el segundo
-    es el de entrada del onProgressUpdate y po último el de salida del doInBackground es el de entrada del de
+    es el de entrada del onProgressUpdate y por último, el de salida del doInBackground es el de entrada del de
     onPostExecute.
     Si espeficiamos estos tres parámetros los parámetros de estos métodos mencionados cambiaran al tipo de
     array con ... que es un array específico para android cuya peculiaridad es que al especificar en los parámeteros

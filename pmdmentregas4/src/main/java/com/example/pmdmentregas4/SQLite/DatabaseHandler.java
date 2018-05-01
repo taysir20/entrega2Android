@@ -197,7 +197,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void deleteAllMessage() {
 
-
         SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
         db.delete(TABLE_MESSAGES, null, null);
 
